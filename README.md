@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="https://img.shields.io/github/issues/dshy1/PHP-Challenge-Laravel-2">
+  <img src="https://img.shields.io/github/license/dshy1/PHP-Challenge-Laravel-2">
+  <img src="https://img.shields.io/github/forks/dshy1/PHP-Challenge-Laravel-2">
+  <img src="https://img.shields.io/github/stars/dshy1/PHP-Challenge-Laravel-2">
+</p>
+
+
 ## Desafio
 
   O desafio consiste em implementar uma aplicação Web utilizando o framework
