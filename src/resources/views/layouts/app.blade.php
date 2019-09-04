@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <title>@yield('title')</title>
     <meta name="description" content="A high-quality &amp; free Bootstrap admin dashboard template pack that comes with lots of templates and components.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -29,7 +29,7 @@
                         <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
                         <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                             <div class="d-table m-auto">
-                            <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/shards-dashboards-logo.svg" alt="Shards Dashboard">
+                            <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="{{asset('images/shards-dashboards-logo.svg')}}" alt="Shards Dashboard">
                             <span class="d-none d-md-inline ml-1">Shards Dashboard</span>
                             </div>
                         </a>
@@ -140,7 +140,7 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
+                                    <img class="user-avatar rounded-circle mr-2" src="{{asset('images/avatars/0.jpg')}}" alt="User Avatar">
                                     <span class="d-none d-md-inline-block">Sierra Brooks</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-small">
@@ -182,6 +182,6 @@
     <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
     <script src="{{asset('scripts/shards-dashboards.1.1.0.min.js')}}"></script>
-    <script src="{{asset('scripts/app/app-blog-overview.1.1.0.js')}}"></script>
+    <script src="{{asset('scripts/app/app-blog-overview.1.1.0.min.js')}}"></script>
 </body>
 </html>
