@@ -23,8 +23,8 @@ class ProdutoController extends Controller
     {
         $produto = new Produto;
         $produto->nome = $request->nome;
-        $produto->valor_compra = $request->valor_compra;
-        $produto->valor_venda = $request->valor_venda;
+        $produto->valor_compra = str_replace(',', '.', $request->valor_compra);
+        $produto->valor_venda = str_replace(',', '.', $request->valor_venda);
         $produto->barCode = $request->barCode;
         $produto->save();
 
