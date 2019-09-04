@@ -16,7 +16,8 @@ class CreateProdutosTable extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->decimal('valorUnitario', 8,2);
+            $table->decimal('valor_compra', 8,2);
+            $table->decimal('valor_venda', 8,2);
             // $table->decimal('estoque', 8,3); AINDA NÃO IREI FAZER ESSA FUNCIONALIDADE
             $table->string('barCode')->nullable();
             $table->string('qrCode')->nullable();
