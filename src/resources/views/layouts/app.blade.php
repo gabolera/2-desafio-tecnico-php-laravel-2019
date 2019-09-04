@@ -14,6 +14,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="{{asset('styles/shards-dashboards.1.1.0.min.css')}}">
     <link rel="stylesheet" href="{{asset('styles/extras.1.1.0.min.css')}}">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="{{asset('style.css')}}">
+
+
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
@@ -50,25 +58,25 @@
                     <div class="nav-wrapper">
                         <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">
+                            <a class="nav-link {{isset($page) ? ($page == 'dashboard') ? 'active' : '' : ''}}" href="/dashboard">
                             <i class="material-icons">edit</i>
                             <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="components-blog-posts.html">
+                            <a class="nav-link {{isset($page) ? ($page == 'cliente') ? 'active' : '' : ''}}" href="{{route('cliente.index')}}">
                             <i class="material-icons">vertical_split</i>
                             <span>Clientes</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="add-new-post.html">
+                            <a class="nav-link {{isset($page) ? ($page == 'produto') ? 'active' : '' : ''}}" href="{{route('produto.index')}}">
                             <i class="material-icons">note_add</i>
                             <span>Produtos</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="tables.html">
+                            <a class="nav-link {{isset($page) ? ($page == 'pedido') ? 'active' : '' : ''}}" href="{{route('pedido.index')}}">
                             <i class="material-icons">table_chart</i>
                             <span>Pedidos</span>
                             </a>
@@ -166,6 +174,45 @@
                         <!-- / .main-navbar -->
             @endguest
             
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                    <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            
+            
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                    <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            
+            
+            @if ($message = Session::get('warning'))
+            <div class="alert alert-warning alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            
+            
+            @if ($message = Session::get('info'))
+            <div class="alert alert-info alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            
+            
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                Please check the form below for errors
+            </div>
+            @endif
+
 
                 <div class="main-content-container container-fluid px-4">
                     @yield('content')    
@@ -175,7 +222,6 @@
             </div>
             </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
@@ -183,5 +229,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
     <script src="{{asset('scripts/shards-dashboards.1.1.0.min.js')}}"></script>
     <script src="{{asset('scripts/app/app-blog-overview.1.1.0.min.js')}}"></script>
+    <script src="{{asset('scripts/plugins/mask/jquery.mask.js')}}"></script>
+
+    @yield('scripts')
 </body>
 </html>
