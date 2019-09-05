@@ -42,6 +42,18 @@
                                 <label for="CPF">Vendendor(a)</label>
                                 <input class="form-control form-control-lg mb-3" type="text" placeholder="000.000.000-00" id="vendedor_id" name="vendedor_id" value="{{isset(Auth::user()->id) ? Auth::user()->id . ' - ' . Auth::user()->name : '' }}" disabled>
                             </div>
+                            <div class="col-4">
+                                <label for="valor_total">Valor Total</label>
+                                <input class="form-control form-control-lg mb-3 valor_total" type="text" placeholder="000.00" id="valor_total" name="valor_total" value="" disabled>
+                            </div>
+                            <div class="col-4">
+                                <label for="desconto">Desconto</label>
+                                <input class="form-control form-control-lg mb-3 desconto" type="text" placeholder="000.00" id="desconto" name="desconto" value="">
+                            </div>
+                            <div class="col-4">
+                                <label for="valor_total">Sub Total</label>
+                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.00" id="valor_total" name="valor_total" value="" disabled>
+                            </div>
                         </div>
 
                         <div class="card card-small mb-4">
@@ -163,17 +175,27 @@
     });
 
     $('table').on('change', function(){
-      var valor_unitario = $('.produto_id').find('option:selected').map(function() {
+      $(this).find('tr').each(function(){
+        var valor_unitario = $(this).find('.produto_id').find('option:selected').map(function() {
         return $(this).data('info');
-      }).get().join(',');
-      var quantidade = $('.quantidade').val();
-      var total = (quantidade * valor_unitario);
+        }).get().join(',');
+        var quantidade = $(this).find('.quantidade').val();
+        var total = (quantidade * valor_unitario);
 
-      $('.valor_unitario').val(valor_unitario);
-      $('.valor_multiplicado').val(total);
+        $(this).find('.valor_unitario').val(valor_unitario);
+        $(this).find('.valor_multiplicado').val(Math.round(total * 100) / 100);
+
+      })
+      
+    //   $(this).find('tr').each(function () {
+    //     var sum = 0;
+    //     $(this).find('.valor_multiplicado').each(function () {
+    //         sum += Number($(this).val());
+    //     });
+    //     //set the value of currents rows sum to the total-combat element in the current row
+    //     $('.valor_total').val(sum);
+    // });
+
     });
-
-  
-
   </script>
 @endsection
