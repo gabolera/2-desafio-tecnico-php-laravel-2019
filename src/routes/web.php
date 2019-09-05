@@ -50,5 +50,6 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
     Route::put('/pedidos/e/{id}', ['as' => 'pedido.update', 'uses' => 'PedidoController@update']);
     Route::get('/pedidos/d/{id}', ['as' => 'pedido.destroy', 'uses' => 'PedidoController@destroy']);
 
+});    
 
-});
+Route::get('/api/produto/consulta', ['as' => 'produto.pesquisa', 'uses' => 'ProdutoController@search']);
