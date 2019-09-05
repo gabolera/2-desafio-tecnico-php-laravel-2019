@@ -149,7 +149,6 @@
 @section('scripts')
   <script>
     $(document).ready(function(){
-      
       var counter = $('tbody').children('tr').length;
 
       $('#addLinha').on('click', function(){
@@ -180,21 +179,20 @@
         return $(this).data('info');
         }).get().join(',');
         var quantidade = $(this).find('.quantidade').val();
-        var total = (quantidade * valor_unitario);
+        var total = (Number(quantidade) * Number(valor_unitario));
 
-        $(this).find('.valor_unitario').val(valor_unitario);
-        $(this).find('.valor_multiplicado').val(Math.round(total * 100) / 100);
-
-      })
-      
-    //   $(this).find('tr').each(function () {
-    //     var sum = 0;
-    //     $(this).find('.valor_multiplicado').each(function () {
-    //         sum += Number($(this).val());
-    //     });
-    //     //set the value of currents rows sum to the total-combat element in the current row
-    //     $('.valor_total').val(sum);
-    // });
+        $(this).find('.valor_unitario').val(Number(valor_unitario));
+        $(this).find('.valor_multiplicado').val(Number(Math.round(total * 100) / 100));        
+      });
+    
+      var sum = 0;
+      $(this).find('tr').each(function () {
+        
+        $(this).find('.valor_multiplicado').each(function () {
+            sum += Number($(this).val());
+        });
+        $('.valor_total').val(sum);
+    });
 
     });
   </script>
