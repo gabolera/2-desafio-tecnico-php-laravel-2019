@@ -29,7 +29,7 @@
                     Valor de venda
                 </th>
                 <th>
-                    
+                    Código de barras
                 </th>
                 <th>
                     Ações

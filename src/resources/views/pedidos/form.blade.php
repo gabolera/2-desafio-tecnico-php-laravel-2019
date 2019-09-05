@@ -51,7 +51,7 @@
                             <div class="card-body p-0 pb-3 text-center">
                                 <table id="table" class="table dshy-table mb-0">
                                 <thead class="bg-light">
-                                    <tr>
+                                    <tr class="cabecalho">
                                     <th scope="col" class="border-0">Produto</th>
                                     <th scope="col" class="border-0">Valor Unitário</th>
                                     <th scope="col" class="border-0">Quantidade</th>  
@@ -85,7 +85,7 @@
                                   @else
                                   <tr>
                                       <td>
-                                        <select class="custom-select form-control-lg" name="pedido[0][produto_id]" id="produto_id">
+                                        <select class="custom-select form-control-lg produto_id" name="pedido[0][produto_id]">
                                             <option selected disabled>Selecione um produto</option>
                                           @foreach($produtos as $produto)
                                               <option value="{{$produto->id}}" data-info="{{$produto->valor_venda}}">{{$produto->nome}}</option>
@@ -93,13 +93,13 @@
                                         </select>
                                       </td>
                                       <td>
-                                          <input type="text" class="form-control form-control-lg" name="pedido[0][valor_unitario]" id="valor_unitario" value="0.00" disabled>
+                                          <input type="text" class="form-control form-control-lg valor_unitario" name="pedido[0][valor_unitario]" value="0.00" disabled>
                                       </td>
                                       <td>
-                                          <input type="number" class="form-control form-control-lg" name="pedido[0][quantidade]" id="quantidade" value="">
+                                          <input type="number" class="form-control form-control-lg quantidade" name="pedido[0][quantidade]" value="">
                                       </td>
                                       <td>
-                                        <input type="text" class="form-control form-control-lg" name="pedido[0][valor_multiplicacao]" id="valor_multiplicado" placeholder="Valor total" value="" disabled>
+                                        <input type="text" class="form-control form-control-lg valor_multiplicado" name="pedido[0][valor_multiplicacao]" placeholder="Valor total" value="" disabled>
                                       </td>
                                       <td><a class="btn btn-danger delLinha" style="color:#fff"><i class="material-icons">delete</i></a></td>
                                       </tr>
@@ -144,10 +144,12 @@
         var novaLinha = $("<tr>");
         var cols = "";
 
-        cols += '<td><input type="text" class="form-control form-control-lg" name="contato[' + counter + '][telefone]" placeholder="(00) 00000-0000"></td>';
-        cols += '<td><select class="custom-select form-control-lg" name="contato[' + counter + '][tipo]"><option value="0" selected>Celular</option><option value="1">Fixo</option><option value="2">Comercial</option></select></td>';
-        cols += '<td><input type="text" class="form-control form-control-lg" name="contato[' + counter + '][obs]" placeholder="Observação"></td>';
+        cols += '<td><select class="custom-select form-control-lg produto_id" name="pedido[' + counter + '][produto_id]"><option selected disabled>Selecione um produto</option> @foreach($produtos as $produto) <option value="{{$produto->id}}" data-info="{{$produto->valor_venda}}">{{$produto->nome}}</option> @endforeach </select> </td>';
+        cols += '<td><input type="text" class="form-control form-control-lg valor_unitario" name="pedido[' + counter + '][valor_unitario]" value="0.00" disabled></td>';
+        cols += '<td><input type="number" class="form-control form-control-lg quantidade" name="pedido[' + counter + '][quantidade]" value=""></td>';
+        cols += '<td><input type="text" class="form-control form-control-lg valor_multiplicado" name="pedido[' + counter + '][valor_multiplicacao]" placeholder="Valor total" value="" disabled> </td>';
         cols += '<td><a style="color:#fff" class="btn btn-danger delLinha"><i class="material-icons">delete</i></a></td>';
+
         novaLinha.append(cols);
         $("table.dshy-table").append(novaLinha);
         counter++;
@@ -157,19 +159,21 @@
         $(this).closest("tr").remove();       
         // counter -= 1
       })
+    
     });
 
-    $('#produto_id, #quantidade').on('change', function(){
-      var valor_unitario = $('#produto_id').find('option:selected').map(function() {
+    $('table').on('change', function(){
+      var valor_unitario = $('.produto_id').find('option:selected').map(function() {
         return $(this).data('info');
       }).get().join(',');
-      var quantidade = $('#quantidade').val();
+      var quantidade = $('.quantidade').val();
       var total = (quantidade * valor_unitario);
 
-      $('#valor_unitario').val(valor_unitario);
-      $('#valor_multiplicado').val(total);
-    })
+      $('.valor_unitario').val(valor_unitario);
+      $('.valor_multiplicado').val(total);
+    });
 
+  
 
   </script>
 @endsection
