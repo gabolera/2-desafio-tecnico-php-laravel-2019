@@ -23,13 +23,13 @@
                     ID
                 </th>
                 <th>
-                    Nome do Cliente
+                    Produto
                 </th>
                 <th>
-                    CPF
+                    Valor de venda
                 </th>
                 <th>
-                    Email
+                    
                 </th>
                 <th>
                     Ações
@@ -46,14 +46,15 @@
                         {{$dado->nome}}
                     </td>
                     <td>
-                        {{$dado->cpf}}
+                        {{$dado->valor_venda}}
                     </td>
                     <td>
-                        {{$dado->email}}
+                        {{$dado->barCode}}
                     </td>
                     <td>
                         {{-- <a href="{{route('fornecedor.edit', $dado->id)}}" class="btn btn-sm btn-primary">Visualizar</a>                                     --}}
-                        <a href="{{route('produto.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
+                    <button type="button" class="btn btn-sm" style="background-color:#00977a; color:#fff;" {{isset($dado->qrCode) ? "onclick=openModal('" . $dado->qrCode . "');" : 'no' }}>QRCode</button>
+                        <a href="{{route('produto.edit', $dado->id)}}" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
                         <a href="{{route('produto.destroy', $dado->id)}}" class="btn btn-sm btn-danger">Deletar</a>
                     </td>
                 </tr>
@@ -62,13 +63,66 @@
         </table>
     </div>
 </div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">QRCode do Produto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div id="qrcode"></div>
+                    </div>    
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <p class="qrcode-desc">QR code do seu produto</p>
+                </div>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Imprimir</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('scripts')
+<script src="{{asset('scripts/plugins/qrCode/generator/qrcode.min.js')}}"></script>
 <script>
-    $('#example').dataTable( {
-    "order": [[ 0, "desc" ]],
-    "pageLength": 20,
-    } );
+$('#example').dataTable( {
+"order": [[ 0, "desc" ]],
+"pageLength": 20,
+} );
+
+// $('#myModal').on('shown.bs.modal', function () {
+//   $('#qrCodeModal').trigger('focus')
+// })
+
+function openModal(code){
+    $('#qrcode').empty();
+    const local = 'localhost:8000/api/produto/consulta?q=';
+
+    var qrcode = new QRCode("qrcode", {
+    text: local+code,
+    width: 250,
+    height: 250,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+
+
+});
+$('#myModal').modal('show')
+}
+
+
 </script>
 @endsection

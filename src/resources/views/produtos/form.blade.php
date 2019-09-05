@@ -31,20 +31,20 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="valor_compra">Valor de compra</label>
-                                <input class="form-control form-control-lg mb-3" id="valor_compra" type="text" placeholder="200,00" name="valor_compra" value="{{isset($dados->cpf) ? $dados->cpf : '' }}" data-mask="#.##0,00" data-mask-reverse="true">
+                                <input class="form-control form-control-lg mb-3" id="valor_compra" type="text" placeholder="200,00" name="valor_compra" value="{{isset($dados->valor_compra) ? $dados->valor_compra : '' }}" data-mask="#.##0,00" data-mask-reverse="true">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="valor_venda">Valor de venda</label>
-                                <input class="form-control form-control-lg mb-3" id="valor_venda" type="text" placeholder="300,00" name="valor_venda" value="{{isset($dados->cpf) ? $dados->cpf : '' }}" data-mask="#.##0,00" data-mask-reverse="true">
+                                <input class="form-control form-control-lg mb-3" id="valor_venda" type="text" placeholder="300,00" name="valor_venda" value="{{isset($dados->valor_venda) ? $dados->valor_venda : '' }}" data-mask="#.##0,00" data-mask-reverse="true">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="valor_venda">Código de barras</label>
-                                <input class="form-control form-control-lg mb-3" id="barCode" type="text" placeholder="Digite o código aqui" name="barCode" value="{{isset($dados->cpf) ? $dados->cpf : '' }}">
+                                <input class="form-control form-control-lg mb-3" id="barCode" type="text" placeholder="Digite o código aqui" name="barCode" value="{{isset($dados->barCode) ? $dados->barCode : '' }}">
                             </div>
                               <div class="col-lg-6 col-md-6 col-sm-12">
                                   <label for="qrCode">QR Code</label>
                                   <div class="input-group">  
-                                    <input type="text" class="form-control form-control-lg mb-3" id="qrCode" name="qrCode" placeholder="QR CODE">
+                                    <input type="text" class="form-control form-control-lg mb-3" id="qrCode" name="qrCode" placeholder="QR CODE" value="{{isset($dados->qrCode) ? $dados->qrCode : ''}}">
                                       <div class="input-group-append">
                                         <button class="btn btn-white dshy-generator" type="button" id="qrCodeGenBtn"><i class="material-icons">refresh </i> Gerar</button>
                                       </div>
@@ -97,15 +97,12 @@ function barCodGen(length) {
    return result;
 }
 
-$(document).ready(function(){
-  var barcode = qrCodGen(20);
-  $('#qrCode').val(barcode);
-})
 
 $('#qrCodeGenBtn').on('click', function(){
   var barcode = qrCodGen(20);
   $('#qrCode').val(barcode);
 })
+
 
   </script>
 @endsection
