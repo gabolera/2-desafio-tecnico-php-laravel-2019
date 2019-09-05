@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listando Clientes')
+@section('title', 'Listando Pedidos')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     <h5><strong>Listando Cleintes</strong><h5>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
-                    <a href="{{route('cliente.create')}}" class="btn btn-success">Cadastrar novo cliente</a>
+                    <a href="{{route('pedido.create')}}" class="btn btn-success">Novo Pedido</a>
                 </div>
             </div>
         </div>
@@ -53,8 +53,8 @@
                     </td>
                     <td>
                         {{-- <a href="{{route('fornecedor.edit', $dado->id)}}" class="btn btn-sm btn-primary">Visualizar</a>                                     --}}
-                        <a href="{{route('cliente.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
-                        <a href="{{route('cliente.destroy', $dado->id)}}" class="btn btn-sm btn-danger">Deletar</a>
+                        <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
+                        <a href="{{route('pedido.destroy', $dado->id)}}" class="btn btn-sm btn-danger">Deletar</a>
                     </td>
                 </tr>
                 @endforeach

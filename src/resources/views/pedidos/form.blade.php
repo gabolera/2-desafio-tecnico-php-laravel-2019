@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', isset($dados) ? 'Editando Cliente' : 'Cadastrar novo cliente')
+@section('title', isset($dados) ? 'Editando Pedido' : 'Novo Pedido')
     
 
 @section('content')
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
           <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <span class="text-uppercase page-subtitle">Cliente</span>
-            <h3 class="page-title">{{isset($dados) ? 'Você está editando ' . $dados->nome : 'Cadastrar Novo cliente'}}</h3>
+            <span class="text-uppercase page-subtitle">Pedidos</span>
+            <h3 class="page-title">{{isset($dados) ? 'Você está editando o pedido nº ' . $dados->id : 'Novo Pedido'}}</h3>
           </div>
         </div>
         <!-- End Page Header -->
@@ -16,7 +16,7 @@
           <div class="col-lg-12 col-md-12">
             <!-- Add New Post Form -->
             <div class="card card-small mb-3">
-                <form class="add-new-post" action="{{isset($dados) ? route('cliente.update',$dados->id) : route('cliente.store')}}" method="POST">
+                <form class="add-new-post" action="{{isset($dados) ? route('pedido.update',$dados->id) : route('pedido.store')}}" method="POST">
                     @csrf
                   @if(isset($dados))
                     <input name="_method" type="hidden" value="PUT">
@@ -26,49 +26,55 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-8">
-                                <label for="nome">Nome do Cliente</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="Nome do cliente" id="nome" name="nome" value="{{isset($dados->nome) ? $dados->nome : '' }}" autofocus>
+                                <label for="cliente_id">Cliente</label>
+                              <div class="input-group">
+                                  
+                                  <select id="cliente_id" name="cliente_id" class="custom-select form-control-lg">
+                                    <option selected disabled>Selecione um cliente</option>
+                                    @foreach ($clientes as $cliente)
+                                    <option value="{{$cliente->id}}">{{$cliente->nome}}</option>
+                                    @endforeach
+                                  </select>
+                              </div>
+ 
                             </div>
                             <div class="col-4">
-                                <label for="CPF">CPF</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.000.000-00" id="CPF" name="cpf" value="{{isset($dados->cpf) ? $dados->cpf : '' }}" data-mask="000.000.000-99" data-mask-reverse="true">
-                            </div>
-                            <div class="col-12">
-                                <label for="email">Email</label>
-                                <input class="form-control form-control-lg mb-3" type="email" placeholder="meuemail@host.com" id="email" name="email" value="{{isset($dados->email) ? $dados->email : '' }}">
+                                <label for="CPF">Vendendor(a)</label>
+                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.000.000-00" id="vendedor_id" name="vendedor_id" value="{{isset(Auth::user()->id) ? Auth::user()->id . ' - ' . Auth::user()->name : '' }}" disabled>
                             </div>
                         </div>
 
                         <div class="card card-small mb-4">
                             <div class="card-header border-bottom">
-                                <h6 class="m-0">Contato</h6>
+                                <h6 class="m-0">Lista de compras</h6>
                             </div>
                             <div class="card-body p-0 pb-3 text-center">
                                 <table id="table" class="table dshy-table mb-0">
                                 <thead class="bg-light">
                                     <tr>
-                                    <th scope="col" class="border-0">Telefone</th>
-                                    <th scope="col" class="border-0">Tipo Telefone</th>
-                                    <th scope="col" class="border-0">Observação</th>
+                                    <th scope="col" class="border-0">Produto</th>
+                                    <th scope="col" class="border-0">Valor Unitário</th>
+                                    <th scope="col" class="border-0">Quantidade</th>  
+                                    <th scope="col" class="border-0">Valor Total</th>
                                     <th scope="col" class="border-0"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  @if(isset($contatos))
+                                  @if(isset($pedidos))
                                   @php $counter = 0 @endphp
-                                    @foreach ($contatos as $contato)
+                                    @foreach ($pedidos as $pedido)
                   
                                     <tr>
-                                    <td>
-                                      <input type="text" class="form-control form-control-lg" name="contato[{{$counter}}][telefone]" placeholder="(00) 00000-0000" value="{{$contato->telefone}}">
-                                    </td>
                                         <td>
                                           <select class="custom-select form-control-lg" name="contato[{{$counter}}][tipo]">
-                                            <option value="0" {{ ($contato->tipo == '0' ? 'selected' : '')}}>Celular</option>
-                                            <option value="1" {{ ($contato->tipo == '1' ? 'selected' : '')}}>Fixo</option>
-                                            <option value="2" {{ ($contato->tipo == '2' ? 'selected' : '')}}>Comercial</option>
+                                            @foreach($produtos as $produto)
+                                            <option value="{{$produto->id}}">{{$produto->nome}}</option>
+                                            @endforeach
                                           </select>
                                         </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-lg" name="contato[{{$counter}}][telefone]" value="">
+                                          </td>
                                         <td>
                                           <input type="text" class="form-control form-control-lg" name="contato[{{$counter}}][obs]" placeholder="Observação" value="{{isset($contato->obs) ? $contato->obs : ''}}">
                                         </td>
@@ -77,12 +83,26 @@
                                         @php ($counter = $counter+1) @endphp
                                     @endforeach
                                   @else
-                                    <tr>
-                                    <td><input type="text" class="form-control form-control-lg" name="contato[0][telefone]" placeholder="(00) 00000-0000"></td>
-                                    <td><select class="custom-select form-control-lg" name="contato[0][tipo]"><option value="0" selected>Celular</option><option value="1">Fixo</option><option value="2">Comercial</option></select></td>
-                                    <td><input type="text" class="form-control form-control-lg" name="contato[0][obs]" placeholder="Observação"></td>
-                                    <td><a class="btn btn-danger delLinha" style="color:#fff"><i class="material-icons">delete</i></a></td>
-                                    </tr>
+                                  <tr>
+                                      <td>
+                                        <select class="custom-select form-control-lg" name="pedido[0][produto_id]" id="produto_id">
+                                            <option selected disabled>Selecione um produto</option>
+                                          @foreach($produtos as $produto)
+                                              <option value="{{$produto->id}}" data-info="{{$produto->valor_venda}}">{{$produto->nome}}</option>
+                                          @endforeach
+                                        </select>
+                                      </td>
+                                      <td>
+                                          <input type="text" class="form-control form-control-lg" name="pedido[0][valor_unitario]" id="valor_unitario" value="0.00" disabled>
+                                      </td>
+                                      <td>
+                                          <input type="number" class="form-control form-control-lg" name="pedido[0][quantidade]" id="quantidade" value="">
+                                      </td>
+                                      <td>
+                                        <input type="text" class="form-control form-control-lg" name="pedido[0][valor_multiplicacao]" placeholder="Valor total" value="" disabled>
+                                      </td>
+                                      <td><a class="btn btn-danger delLinha" style="color:#fff"><i class="material-icons">delete</i></a></td>
+                                      </tr>
                                   @endif
                                 </tbody>
                                 </table>
@@ -138,5 +158,15 @@
         // counter -= 1
       })
     });
+
+    $('#produto_id').on('click', function(){
+      var valor_unitario = $(this).find('option:selected').map(function() {
+        return $(this).data('info');
+      }).get().join(',');
+      $('#valor_unitario').val(valor_unitario);
+      console.log(valor_unitario)
+    })
+
+
   </script>
 @endsection
