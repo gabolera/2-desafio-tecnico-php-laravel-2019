@@ -108,7 +108,7 @@ $('#example').dataTable( {
 
 function openModal(code){
     $('#qrcode').empty();
-    const local = '191.253.118.119:15321/api/produto/consulta?q=';
+    const local = '{{env('APP_URL')}}/api/produto/consulta?q=';
 
     var qrcode = new QRCode("qrcode", {
     text: local+code,
