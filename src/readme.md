@@ -21,8 +21,14 @@ $ cp .env.example .env
 Go to create a table on database.
 Before create the table, go to `.env` file for edit settings of project.
 
+---
 On `.env` file
 Change your database configurations.
+
+##### Don't forgotten edit 
+```diff
++ APP_URL=yourIP:PORT
+```
 
 
 #### Now lets start project 
@@ -44,3 +50,5 @@ $ php artisan serve
 | Clientes     | [localhost:8000/dashboard/clientes](http://localhost:8000/dashboard/clientes) |
 | Produtos     | [localhost:8000/dashboard/produtos](http://localhost:8000/dashboard/produtos) |
 | Pedidos      | [localhost:8000/dashboard/pedidos](http://localhost:8000/dashboard/pedidos)   |
+| ---          | `API`                                                                         |
+| API/Produto  | [localhost:8000/api/produto/consulta?q={$token}](#)                           |
