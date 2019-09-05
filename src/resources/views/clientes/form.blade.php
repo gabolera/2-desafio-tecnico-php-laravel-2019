@@ -27,15 +27,15 @@
                         <div class="row">
                             <div class="col-8">
                                 <label for="nome">Nome do Cliente</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="Nome do cliente" id="nome" name="nome" value="{{isset($dados->nome) ? $dados->nome : '' }}" autofocus>
+                                <input class="form-control form-control-lg mb-3" type="text" placeholder="Nome do cliente" id="nome" name="nome" value="{{isset($dados->nome) ? $dados->nome : old('nome') }}" autofocus>
                             </div>
                             <div class="col-4">
                                 <label for="CPF">CPF</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.000.000-00" id="CPF" name="cpf" value="{{isset($dados->cpf) ? $dados->cpf : '' }}" data-mask="000.000.000-99" data-mask-reverse="true">
+                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.000.000-00" id="CPF" name="cpf" value="{{isset($dados->cpf) ? $dados->cpf : old('cpf') }}" data-mask="000.000.000-99" data-mask-reverse="true">
                             </div>
                             <div class="col-12">
                                 <label for="email">Email</label>
-                                <input class="form-control form-control-lg mb-3" type="email" placeholder="meuemail@host.com" id="email" name="email" value="{{isset($dados->email) ? $dados->email : '' }}">
+                                <input class="form-control form-control-lg mb-3" type="email" placeholder="meuemail@host.com" id="email" name="email" value="{{isset($dados->email) ? $dados->email : old('email') }}">
                             </div>
                         </div>
 

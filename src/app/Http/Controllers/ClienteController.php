@@ -22,6 +22,25 @@ class ClienteController extends Controller
     {
         $contatos = json_encode($request->contato);
 
+        $data = null;
+
+        $request->validate([
+            'nome' => 'required',
+            'cpf' => 'required|unique:clientes|max:14|min:14',
+            'email' => 'required'
+        ],
+        [
+            'cpf.required' => 'Está faltando o CPF!',
+            'cpf.unique' => 'Este CPF já está cadastrado!',
+            'cpf.max' => 'Ops... isso não parece um CPF...',
+            'cpf.min' => 'Ops... O CPF está incompleto!',
+            'nome.required' => 'É necessário dar um nome ao cliente!',
+            'email.required' => 'É necessário ter um email',
+        ]);
+    
+        $data = $request->all();
+        
+
         $cliente = new Cliente;
         $cliente->nome = $request->nome;
         $cliente->cpf = $request->cpf;
@@ -31,7 +50,7 @@ class ClienteController extends Controller
 
         $msg = 'Cliente cadastrado com sucesso!';
 
-        return redirect()->route('cliente.index')->with(['success' => $msg,]);
+        return redirect()->route('cliente.index')->with(['success' => $msg])->withInput();
     }
 
     public function show($id)
@@ -49,6 +68,21 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         $contatos = json_encode($request->contato);
+
+        $request->validate([
+            'nome' => 'required',
+            'cpf' => 'required|max:14|min:14',
+            'email' => 'required'
+        ],
+        [
+            'cpf.required' => 'Está faltando o CPF!',
+            'cpf.max' => 'Ops... isso não parece um CPF...',
+            'cpf.min' => 'Ops... O CPF está incompleto!',
+            'nome.required' => 'É necessário dar um nome ao cliente!',
+            'email.required' => 'É necessário ter um email',
+        ]);
+    
+        $data = $request->all();
 
         $cliente = Cliente::find($id);
         $cliente->nome = $request->nome;
