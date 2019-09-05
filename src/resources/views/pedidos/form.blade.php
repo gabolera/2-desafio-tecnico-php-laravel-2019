@@ -99,7 +99,7 @@
                                           <input type="number" class="form-control form-control-lg" name="pedido[0][quantidade]" id="quantidade" value="">
                                       </td>
                                       <td>
-                                        <input type="text" class="form-control form-control-lg" name="pedido[0][valor_multiplicacao]" placeholder="Valor total" value="" disabled>
+                                        <input type="text" class="form-control form-control-lg" name="pedido[0][valor_multiplicacao]" id="valor_multiplicado" placeholder="Valor total" value="" disabled>
                                       </td>
                                       <td><a class="btn btn-danger delLinha" style="color:#fff"><i class="material-icons">delete</i></a></td>
                                       </tr>
@@ -110,7 +110,7 @@
                             <div class="card-footer">
                                 <hr>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-sm btn-success" style="color:#fff;" id="addLinha">+ Adicionar contato</a>
+                                    <a class="btn btn-sm btn-success" style="color:#fff;" id="addLinha">+ Adicionar produto</a>
                                 </div>
                             </div>
                         </div>
@@ -159,12 +159,15 @@
       })
     });
 
-    $('#produto_id').on('click', function(){
-      var valor_unitario = $(this).find('option:selected').map(function() {
+    $('#produto_id, #quantidade').on('change', function(){
+      var valor_unitario = $('#produto_id').find('option:selected').map(function() {
         return $(this).data('info');
       }).get().join(',');
+      var quantidade = $('#quantidade').val();
+      var total = (quantidade * valor_unitario);
+
       $('#valor_unitario').val(valor_unitario);
-      console.log(valor_unitario)
+      $('#valor_multiplicado').val(total);
     })
 
 

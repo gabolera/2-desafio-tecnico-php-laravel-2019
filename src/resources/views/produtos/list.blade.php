@@ -8,7 +8,7 @@
         <div class="card-header border-bottom mt-2">
             <div class="row">
                 <div class="col-6">
-                    <h5><strong>Listando Cleintes</strong><h5>
+                    <h5><strong>Listando Produtos</strong><h5>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
                     <a href="{{route('produto.create')}}" class="btn btn-success">Cadastrar novo Produto</a>
