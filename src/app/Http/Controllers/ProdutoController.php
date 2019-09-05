@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Auth;
 
 use App\Models\Produto;
 
@@ -97,7 +98,19 @@ class ProdutoController extends Controller
 
     public function search(Request $request){
         $search = $request->q;
-        $result = Produto::where('qrCode', $search)->first();
+
+        /**
+         *  SE A PESSOA ESTIVER LOGADA NO SISTEMA, A SUA CONSULTA
+         *  NA API SERÁ COMPLETA. ENTRETANTO, SE A PESSOA NÃO ESTIVER
+         *  LOGADA, SÓ IRÁ APARECER O VALOR E O NOME DO PRODUTO. 
+         */
+
+        if(\Auth::check()){
+            $result = Produto::where('qrCode', $search)->first();
+        }else{
+            $result = Produto::where('qrCode', $search)->first(['nome', 'valor_venda']);
+        }
+
         return $result;
     }
 }
