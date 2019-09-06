@@ -28,6 +28,24 @@ class PedidoController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'cliente_id' => 'required',
+            'vendedor_id' => 'required',
+            'valorTotal' => 'required',
+            'subTotal' => 'required',
+            'pedido' => 'required',            
+        ],
+        [
+            'cliente_id.required' => 'Está faltando selecionar o cliente!',
+            'vendedor_id.required' => 'Ops... O vendedor não está logado!',
+            'valorTotal.required' => 'Ops... O servidor não enviou as informaçõe necessárias!',
+            'subTotal.required' => 'Ops... O servidor não enviou as informaçõe necessárias!',
+            'pedido.required' => 'Ops... O servidor não enviou as informaçõe necessárias!',
+
+        ]);
+    
+
         $total = $request->valorTotal;
         $desconto = $request->desconto;
         $subtotal = $request->subTotal;
@@ -46,13 +64,13 @@ class PedidoController extends Controller
 
         $sub_total = ($valor_total - $desconto);
 
-        if($sub_total != $subtotal){
-            $msg = 'errorrrrr no sub-total';
-        }elseif($total != $valor_total){
-            $msg = 'erro no TOTAL';
-        }else{
-            $msg = 'Aeeeeee Deu certo';
-        }
+        // if($sub_total != $subtotal){
+        //     $msg = 'Ops... O servidor não consegiu processar o sub-total';
+        // }elseif($total != $valor_total){
+        //     $msg = 'Ops... O servidor não conseguiu processar o total';
+        // }else{
+            $msg = 'Pedido registrado com sucesso!';
+        // }
 
         $dados = new Pedido;
         $dados->cliente_id = $request->cliente_id;
@@ -65,7 +83,7 @@ class PedidoController extends Controller
         // $dados->status = 0;
         $dados->save();
 
-        return redirect()->route('pedidos.index')->with(['success' => $msg]);
+        return redirect()->route('pedido.index')->with(['success' => $msg])->withInput();
     }
 
     public function show($id)

@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+
+use App\Models\Pedido;
 
 class DashboardController extends Controller
 {
 
     public function index()
     {
-        return view('dashboard.index')->with(['page' => 'dashboard']);
+        $vendas_hoje = Pedido::where('dataPedido', '2019-09-06')->sum('subTotal');
+        return view('dashboard.index')->with(['page' => 'dashboard', 'vendas_hoje' => $vendas_hoje]);
     }
 
     public function error()

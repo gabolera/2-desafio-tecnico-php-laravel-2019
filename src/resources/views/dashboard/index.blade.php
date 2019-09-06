@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard')
+
 @section('content')
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
@@ -16,8 +18,8 @@
             <div class="card-body p-0 d-flex">
                 <div class="d-flex flex-column m-auto">
                 <div class="stats-small__data text-center">
-                    <span class="stats-small__label text-uppercase">Posts</span>
-                    <h6 class="stats-small__value count my-3">2,390</h6>
+                    <span class="stats-small__label text-uppercase">Vendas Hoje</span>
+                    <h6 class="stats-small__value count my-3">{{$vendas_hoje}}</h6>
                 </div>
                 <div class="stats-small__data">
                     <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
