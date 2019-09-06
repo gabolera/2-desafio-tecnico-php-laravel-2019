@@ -40,19 +40,20 @@
                             </div>
                             <div class="col-4">
                                 <label for="CPF">Vendendor(a)</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.000.000-00" id="vendedor_id" name="vendedor_id" value="{{isset(Auth::user()->id) ? Auth::user()->id . ' - ' . Auth::user()->name : '' }}" disabled>
+                                <input class="form-control form-control-lg mb-3" type="text" id="vendedor_id" value="{{isset(Auth::user()->id) ? Auth::user()->id . ' - ' . Auth::user()->name : '' }}" readonly>
+                                <input class="form-control form-control-lg mb-3" type="text" id="vendedor_id" name="vendedor_id" value="{{isset(Auth::user()->id) ? Auth::user()->id : '' }}" hidden>
                             </div>
                             <div class="col-4">
                                 <label for="valor_total">Valor Total</label>
-                                <input class="form-control form-control-lg mb-3 valor_total" type="text" placeholder="000.00" id="valor_total" name="valor_total" value="" disabled>
+                                <input class="form-control form-control-lg mb-3 valor_total" type="text" placeholder="000.00" id="valor_total" name="valorTotal" value="" readonly>
                             </div>
                             <div class="col-4">
                                 <label for="desconto">Desconto</label>
-                                <input class="form-control form-control-lg mb-3 desconto" type="text" placeholder="000.00" id="desconto" name="desconto" value="">
+                                <input class="form-control form-control-lg mb-3 desconto" type="text" placeholder="000.00" id="desconto" name="desconto" value="" data-mask="##0.00" data-mask-reverse="true">
                             </div>
                             <div class="col-4">
-                                <label for="valor_total">Sub Total</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.00" id="valor_total" name="valor_total" value="" disabled>
+                                <label for="sub_total">Sub Total</label>
+                                <input class="form-control form-control-lg mb-3 sub_total" type="text" placeholder="000.00" id="sub_total" name="subTotal" value="" readonly>
                             </div>
                         </div>
 
@@ -105,13 +106,13 @@
                                         </select>
                                       </td>
                                       <td>
-                                          <input type="text" class="form-control form-control-lg valor_unitario" name="pedido[0][valor_unitario]" value="0.00" disabled>
+                                          <input type="text" class="form-control form-control-lg valor_unitario" name="pedido[0][valor_unitario]" value="0.00" readonly>
                                       </td>
                                       <td>
                                           <input type="number" class="form-control form-control-lg quantidade" name="pedido[0][quantidade]" value="">
                                       </td>
                                       <td>
-                                        <input type="text" class="form-control form-control-lg valor_multiplicado" name="pedido[0][valor_multiplicacao]" placeholder="Valor total" value="" disabled>
+                                        <input type="text" class="form-control form-control-lg valor_multiplicado" name="pedido[0][valor_multiplicacao]" placeholder="Valor total" value="" readonly>
                                       </td>
                                       <td><a class="btn btn-danger delLinha" style="color:#fff"><i class="material-icons">delete</i></a></td>
                                       </tr>
@@ -156,9 +157,9 @@
         var cols = "";
 
         cols += '<td><select class="custom-select form-control-lg produto_id" name="pedido[' + counter + '][produto_id]"><option selected disabled>Selecione um produto</option> @foreach($produtos as $produto) <option value="{{$produto->id}}" data-info="{{$produto->valor_venda}}">{{$produto->nome}}</option> @endforeach </select> </td>';
-        cols += '<td><input type="text" class="form-control form-control-lg valor_unitario" name="pedido[' + counter + '][valor_unitario]" value="0.00" disabled></td>';
+        cols += '<td><input type="text" class="form-control form-control-lg valor_unitario" name="pedido[' + counter + '][valor_unitario]" value="0.00" readonly></td>';
         cols += '<td><input type="number" class="form-control form-control-lg quantidade" name="pedido[' + counter + '][quantidade]" value=""></td>';
-        cols += '<td><input type="text" class="form-control form-control-lg valor_multiplicado" name="pedido[' + counter + '][valor_multiplicacao]" placeholder="Valor total" value="" disabled> </td>';
+        cols += '<td><input type="text" class="form-control form-control-lg valor_multiplicado" name="pedido[' + counter + '][valor_multiplicacao]" placeholder="Valor total" value="" readonly> </td>';
         cols += '<td><a style="color:#fff" class="btn btn-danger delLinha"><i class="material-icons">delete</i></a></td>';
 
         novaLinha.append(cols);
@@ -181,8 +182,8 @@
         var quantidade = $(this).find('.quantidade').val();
         var total = (Number(quantidade) * Number(valor_unitario));
 
-        $(this).find('.valor_unitario').val(Number(valor_unitario));
-        $(this).find('.valor_multiplicado').val(Number(Math.round(total * 100) / 100));        
+        $(this).find('.valor_unitario').val(Number(valor_unitario).toFixed(2));
+        $(this).find('.valor_multiplicado').val((Number(Math.round(total * 100) / 100)).toFixed(2));        
       });
     
       var sum = 0;
@@ -191,7 +192,13 @@
         $(this).find('.valor_multiplicado').each(function () {
             sum += Number($(this).val());
         });
-        $('.valor_total').val(sum);
+        $('.valor_total').val(sum.toFixed(2));
+    });
+    
+    $('.desconto, table').on('change', function(){
+      var desconto = $('.desconto').val();
+      var total = $('.valor_total').val();
+      $('.sub_total').val((Math.round((Number(total) - Number(desconto)) * 100) / 100).toFixed(2));
     });
 
     });
