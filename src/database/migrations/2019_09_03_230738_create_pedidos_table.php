@@ -23,7 +23,7 @@ class CreatePedidosTable extends Migration
             
             $table->text('pedidos')->nullable();
             $table->decimal('valorTotal', 8,2);
-            $table->decimal('desconto', 8,2)->default(0.00);
+            $table->decimal('desconto', 8,2)->nullable();
             $table->decimal('subTotal', 8,2);
             $table->integer('status')->default(0);
             $table->date('dataPedido');

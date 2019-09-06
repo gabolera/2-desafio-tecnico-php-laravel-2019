@@ -29,12 +29,13 @@
                                 <label for="cliente_id">Cliente</label>
                               <div class="input-group">
                                   
-                                  <select id="cliente_id" name="cliente_id" class="custom-select form-control-lg">
+                                  <select id="cliente_id" name="cliente_id" class="custom-select form-control-lg js-example-responsive">
                                     <option selected disabled>Selecione um cliente</option>
                                     @foreach ($clientes as $cliente)
                                     <option value="{{$cliente->id}}">{{$cliente->nome}}</option>
                                     @endforeach
                                   </select>
+                                  
                               </div>
  
                             </div>
@@ -150,6 +151,12 @@
 @section('scripts')
   <script>
     $(document).ready(function(){
+
+      $(".js-example-responsive").select2({
+        width: 'resolve',
+      });
+
+      
       var counter = $('tbody').children('tr').length;
 
       $('#addLinha').on('click', function(){

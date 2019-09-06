@@ -30,3 +30,26 @@
     border-radius: 10px;
 	background-color: #4e4e4e;
 }
+
+
+.select2-container--default .select2-selection--single{
+    height: auto;
+    padding: .4375rem .75rem;
+    font-size: .8125rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #e1e5eb;
+    font-weight: 300;
+    will-change: border-color,box-shadow;
+    border-radius: .25rem;
+    box-shadow: none;
+    transition: box-shadow 250ms cubic-bezier(.27,.01,.38,1.06),border 250ms cubic-bezier(.27,.01,.38,1.06);
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    padding: .8125rem .8125rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .375rem;
+}
