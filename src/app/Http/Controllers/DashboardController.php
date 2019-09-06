@@ -12,7 +12,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $vendas_hoje = Pedido::where('dataPedido', '2019-09-06')->sum('subTotal');
+        $vendas_hoje = Pedido::where('dataPedido', Carbon::now()->format('Y/m/d'))->sum('subTotal');
         return view('dashboard.index')->with(['page' => 'dashboard', 'vendas_hoje' => $vendas_hoje]);
     }
 

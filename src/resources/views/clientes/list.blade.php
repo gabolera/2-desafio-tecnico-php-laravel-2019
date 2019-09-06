@@ -8,7 +8,7 @@
         <div class="card-header border-bottom mt-2">
             <div class="row">
                 <div class="col-6">
-                    <h5><strong>Listando Cleintes</strong><h5>
+                    <h5><strong>Listando Clientes</strong><h5>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
                     <a href="{{route('cliente.create')}}" class="btn btn-success">Cadastrar novo cliente</a>
