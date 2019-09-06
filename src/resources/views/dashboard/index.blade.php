@@ -34,8 +34,8 @@
             <div class="card-body p-0 d-flex">
                 <div class="d-flex flex-column m-auto">
                 <div class="stats-small__data text-center">
-                    <span class="stats-small__label text-uppercase">Pages</span>
-                    <h6 class="stats-small__value count my-3">182</h6>
+                    <span class="stats-small__label text-uppercase">Total Vendido Hoje</span>
+                    <h6 class="stats-small__value count my-3">{{$total_vendido_hoje}}</h6>
                 </div>
                 <div class="stats-small__data">
                     <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
