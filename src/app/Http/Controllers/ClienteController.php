@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+
 use App\Models\Cliente;
 
 class ClienteController extends Controller
@@ -20,11 +23,10 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
+
         $contatos = json_encode($request->contato);
 
-        $data = null;
-
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nome' => 'required',
             'cpf' => 'required|unique:clientes|max:14|min:14',
             'email' => 'required'
@@ -37,10 +39,14 @@ class ClienteController extends Controller
             'nome.required' => 'É necessário dar um nome ao cliente!',
             'email.required' => 'É necessário ter um email',
         ]);
-    
-        $data = $request->all();
-        
 
+        if($validator->fails()) {
+            $contatos_return = json_decode($contatos);
+            return redirect()->back()->with(['return_contatos' => $contatos_return])->withErrors($validator)->withInput();
+        }
+
+        $data = $request->all();
+    
         $cliente = new Cliente;
         $cliente->nome = $request->nome;
         $cliente->cpf = $request->cpf;
@@ -49,8 +55,9 @@ class ClienteController extends Controller
         $cliente->save();
 
         $msg = 'Cliente cadastrado com sucesso!';
+    
+        return redirect()->route('cliente.index')->with(['success' => $msg]);
 
-        return redirect()->route('cliente.index')->with(['success' => $msg])->withInput();
     }
 
     public function show($id)
@@ -69,7 +76,7 @@ class ClienteController extends Controller
     {
         $contatos = json_encode($request->contato);
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nome' => 'required',
             'cpf' => 'required|max:14|min:14',
             'email' => 'required'
@@ -81,8 +88,12 @@ class ClienteController extends Controller
             'nome.required' => 'É necessário dar um nome ao cliente!',
             'email.required' => 'É necessário ter um email',
         ]);
-    
-        $data = $request->all();
+
+        if($validator->fails()) {
+            $contatos_return = json_decode($contatos);
+            return redirect()->back()->with(['return_contatos' => $contatos_return])->withErrors($validator)->withInput();
+        }
+
 
         $cliente = Cliente::find($id);
         $cliente->nome = $request->nome;
@@ -93,7 +104,7 @@ class ClienteController extends Controller
 
         $msg = 'O Cliente ' . $cliente->nome . ' foi editado com sucesso!';
 
-        return redirect()->route('cliente.index')->with(['success' => $msg]);
+        return redirect()->route('cliente.index')->with(['success' => $msg, 'contatos' => json_decode($contatos)]);
     }
 
     public function destroy($id)

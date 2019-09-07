@@ -199,6 +199,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
     <script src="{{asset('scripts/plugins/mask/jquery.mask.js')}}"></script>
 
+
     @yield('scripts')
 </body>
 </html>
