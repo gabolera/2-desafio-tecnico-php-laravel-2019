@@ -23,6 +23,12 @@
                     @else
 
                     @endif
+
+                    @php
+                         if(!empty(Session::get('old_return'))){
+                          $dados = Session::get('old_return');
+                        }
+                    @endphp
                     <div class="card-body">
                         <div class="row">
                             <div class="col-8">

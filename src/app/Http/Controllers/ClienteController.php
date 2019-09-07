@@ -91,7 +91,8 @@ class ClienteController extends Controller
 
         if($validator->fails()) {
             $contatos_return = json_decode($contatos);
-            return redirect()->back()->with(['return_contatos' => $contatos_return])->withErrors($validator)->withInput();
+            $oldReturn = ['nome' => $request->nome,'email' => $request->email,'cpf' => $request->cpf];
+            return redirect()->back()->with(['return_contatos' => $contatos_return, 'old_return' => $oldReturn])->withErrors($validator)->withInput();
         }
 
 

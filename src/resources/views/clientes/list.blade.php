@@ -54,7 +54,7 @@
                     <td>
                         {{-- <a href="{{route('fornecedor.edit', $dado->id)}}" class="btn btn-sm btn-primary">Visualizar</a>                                     --}}
                         <a href="{{route('cliente.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
-                        <a href="{{route('cliente.destroy', $dado->id)}}" class="btn btn-sm btn-danger">Deletar</a>
+                        <button type="button" id="deleteBox" class="btn btn-sm btn-danger" onclick="deleteModal({{$dado->id}})" >Deletar</a>
                     </td>
                 </tr>
                 @endforeach
@@ -70,5 +70,13 @@
     "order": [[ 0, "desc" ]],
     "pageLength": 20,
     } );
+
+    function deleteModal(id){
+        $('#msg-delete').text('voce###');
+        
+
+
+$('#deleteModal').modal('show')
+}
 </script>
 @endsection
