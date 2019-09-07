@@ -212,7 +212,7 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger">Deletar</button>
+                <a id="deletar-confirma" class="btn btn-danger">Deletar</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
             </div>
             </div>
