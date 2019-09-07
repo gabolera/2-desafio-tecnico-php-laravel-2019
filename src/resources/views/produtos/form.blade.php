@@ -27,24 +27,24 @@
                         <div class="row">
                             <div class="col-12">
                                 <label for="nome">Nome do Produto</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="Nome do Produto" id="nome" name="nome" value="{{isset($dados->nome) ? $dados->nome : '' }}" autofocus>
+                                <input class="form-control form-control-lg mb-3" type="text" placeholder="Nome do Produto" id="nome" name="nome" value="{{isset($dados->nome) ? $dados->nome : old('nome') }}" autofocus>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="valor_compra">Valor de compra</label>
-                                <input class="form-control form-control-lg mb-3" id="valor_compra" type="text" placeholder="200,00" name="valor_compra" value="{{isset($dados->valor_compra) ? $dados->valor_compra : '' }}" data-mask="#.##0,00" data-mask-reverse="true">
+                                <input class="form-control form-control-lg mb-3" id="valor_compra" type="text" placeholder="200,00" name="valor_compra" value="{{isset($dados->valor_compra) ? $dados->valor_compra : old('valor_compra') }}" data-mask="#.##0,00" data-mask-reverse="true">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="valor_venda">Valor de venda</label>
-                                <input class="form-control form-control-lg mb-3" id="valor_venda" type="text" placeholder="300,00" name="valor_venda" value="{{isset($dados->valor_venda) ? $dados->valor_venda : '' }}" data-mask="#.##0,00" data-mask-reverse="true">
+                                <input class="form-control form-control-lg mb-3" id="valor_venda" type="text" placeholder="300,00" name="valor_venda" value="{{isset($dados->valor_venda) ? $dados->valor_venda : old('valor_venda') }}" data-mask="#.##0,00" data-mask-reverse="true">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="valor_venda">Código de barras</label>
-                                <input class="form-control form-control-lg mb-3" id="barCode" type="text" placeholder="Digite o código aqui" name="barCode" value="{{isset($dados->barCode) ? $dados->barCode : '' }}">
+                                <input class="form-control form-control-lg mb-3" id="barCode" type="text" placeholder="Digite o código aqui" name="barCode" value="{{isset($dados->barCode) ? $dados->barCode : old('barCode') }}">
                             </div>
                               <div class="col-lg-6 col-md-6 col-sm-12">
                                   <label for="qrCode">QR Code</label>
                                   <div class="input-group">  
-                                    <input type="text" class="form-control form-control-lg mb-3" id="qrCode" name="qrCode" placeholder="QR CODE" value="{{isset($dados->qrCode) ? $dados->qrCode : ''}}">
+                                    <input type="text" class="form-control form-control-lg mb-3" id="qrCode" name="qrCode" placeholder="QR CODE" value="{{isset($dados->qrCode) ? $dados->qrCode : old('qrCode') }}">
                                       <div class="input-group-append">
                                         <button class="btn btn-white dshy-generator" type="button" id="qrCodeGenBtn"><i class="material-icons">refresh </i> Gerar</button>
                                       </div>
@@ -78,16 +78,6 @@
 @section('scripts')
   <script>
 function qrCodGen(length) {
-   var result           = '';
-   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-   var charactersLength = characters.length;
-   for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
-}
-
-function barCodGen(length) {
    var result           = '';
    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
    var charactersLength = characters.length;

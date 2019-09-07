@@ -25,6 +25,18 @@ class ProdutoController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nome' => 'required',
+            'valor_compra' => 'required',
+            'valor_venda' => 'required',         
+        ],
+        [
+            'nome.required' => 'É necessário dar um nome ao cliente!',
+            'valor_compra.required' => 'Você precisa adicionar um valor de compra!',
+            'valor_venda.required' => 'Você precisa adicionar um valor de venda',
+        ]);
+    
         $qrCode = $request->qrCode;
         $code_alterado = null;
 
@@ -60,6 +72,18 @@ class ProdutoController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'nome' => 'required',
+            'valor_compra' => 'required',
+            'valor_venda' => 'required',         
+        ],
+        [
+            'nome.required' => 'É necessário dar um nome ao cliente!',
+            'valor_compra.required' => 'Você precisa adicionar um valor de compra!',
+            'valor_venda.required' => 'Você precisa adicionar um valor de venda',
+        ]);
+        
         $produto = Produto::find($id);
 
         $qrCode = $request->qrCode;

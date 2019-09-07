@@ -35,13 +35,13 @@
                 <div class="d-flex flex-column m-auto">
                 <div class="stats-small__data text-center">
                     <span class="stats-small__label text-uppercase">Total Vendido Hoje</span>
-                    <h6 class="stats-small__value count my-3">{{$total_vendido_hoje}}</h6>
+                    <h6 class="stats-small__value count my-3">R$ {{$total_vendido_hoje}}</h6>
                 </div>
                 <div class="stats-small__data">
                     <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
                 </div>
                 </div>
-                <canvas height="120" class="blog-overview-stats-small-2"></canvas>
+                <canvas id="valor_total" height="120" ></canvas>
             </div>
             </div>
         </div>
@@ -771,4 +771,40 @@
           </span>
         </footer>
       </main>
+@endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="{{asset('scripts/shards-dashboards.1.1.0.min.js')}}"></script>
+<script src="{{asset('scripts/app/app-blog-overview.1.1.0.min.js')}}"></script>
+
+<script>
+
+var ctx = document.getElementById('valor_total');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    fill: true,
+    data: {
+        datasets: [{
+            label: 'Vendido R$',
+            data: [{
+                    x: '20/03/2019',
+                    y: '2000'
+                  }, {
+                    x: '20/09/2019',
+                    y: '5000'
+                  }],
+            backgroundColor: [
+                'rgba(153, 102, 255, 0.2)',
+            ],
+            borderColor: [
+                'rgba(153, 102, 255, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+
+});
+
+</script>
 @endsection

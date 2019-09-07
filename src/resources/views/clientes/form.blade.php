@@ -60,17 +60,17 @@
                   
                                     <tr>
                                     <td>
-                                      <input type="text" class="form-control form-control-lg" name="contato[{{$counter}}][telefone]" placeholder="(00) 00000-0000" value="{{$contato->telefone}}">
+                                      <input type="text" class="form-control form-control-lg" name="contatos[{{$counter}}][telefone]" placeholder="(00) 00000-0000" value="{{$contato->telefone}}">
                                     </td>
                                         <td>
-                                          <select class="custom-select form-control-lg" name="contato[{{$counter}}][tipo]">
+                                          <select class="custom-select form-control-lg" name="contatos[{{$counter}}][tipo]">
                                             <option value="0" {{ ($contato->tipo == '0' ? 'selected' : '')}}>Celular</option>
                                             <option value="1" {{ ($contato->tipo == '1' ? 'selected' : '')}}>Fixo</option>
                                             <option value="2" {{ ($contato->tipo == '2' ? 'selected' : '')}}>Comercial</option>
                                           </select>
                                         </td>
                                         <td>
-                                          <input type="text" class="form-control form-control-lg" name="contato[{{$counter}}][obs]" placeholder="Observação" value="{{isset($contato->obs) ? $contato->obs : ''}}">
+                                          <input type="text" class="form-control form-control-lg" name="contatos[{{$counter}}][obs]" placeholder="Observação" value="{{isset($contato->obs) ? $contato->obs : ''}}">
                                         </td>
                                         <td><a class="btn btn-danger delLinha" style="color:#fff"><i class="material-icons">delete</i></a></td>
                                         </tr>
@@ -78,9 +78,9 @@
                                     @endforeach
                                   @else
                                     <tr>
-                                    <td><input type="text" class="form-control form-control-lg" name="contato[0][telefone]" placeholder="(00) 00000-0000"></td>
-                                    <td><select class="custom-select form-control-lg" name="contato[0][tipo]"><option value="0" selected>Celular</option><option value="1">Fixo</option><option value="2">Comercial</option></select></td>
-                                    <td><input type="text" class="form-control form-control-lg" name="contato[0][obs]" placeholder="Observação"></td>
+                                    <td><input type="text" class="form-control form-control-lg" name="contatos[0][telefone]" placeholder="(00) 00000-0000"></td>
+                                    <td><select class="custom-select form-control-lg" name="contatos[0][tipo]"><option value="0" selected>Celular</option><option value="1">Fixo</option><option value="2">Comercial</option></select></td>
+                                    <td><input type="text" class="form-control form-control-lg" name="contatos[0][obs]" placeholder="Observação"></td>
                                     <td><a class="btn btn-danger delLinha" style="color:#fff"><i class="material-icons">delete</i></a></td>
                                     </tr>
                                   @endif
@@ -98,9 +98,9 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <div>
-                            <button class="btn btn-outline-secondary">
+                            <a href="{{route('cliente.index')}}" class="btn btn-outline-secondary">
                                 <i class="material-icons">cancel</i> Cancelar
-                            </button>
+                            </a>
                             <button class="btn btn-primary ml-auto" type="submit">
                                 <i class="material-icons">file_copy</i> Salvar
                             </button>
@@ -124,9 +124,9 @@
         var novaLinha = $("<tr>");
         var cols = "";
 
-        cols += '<td><input type="text" class="form-control form-control-lg" name="contato[' + counter + '][telefone]" placeholder="(00) 00000-0000"></td>';
-        cols += '<td><select class="custom-select form-control-lg" name="contato[' + counter + '][tipo]"><option value="0" selected>Celular</option><option value="1">Fixo</option><option value="2">Comercial</option></select></td>';
-        cols += '<td><input type="text" class="form-control form-control-lg" name="contato[' + counter + '][obs]" placeholder="Observação"></td>';
+        cols += '<td><input type="text" class="form-control form-control-lg" name="contatos[' + counter + '][telefone]" placeholder="(00) 00000-0000"></td>';
+        cols += '<td><select class="custom-select form-control-lg" name="contatos[' + counter + '][tipo]"><option value="0" selected>Celular</option><option value="1">Fixo</option><option value="2">Comercial</option></select></td>';
+        cols += '<td><input type="text" class="form-control form-control-lg" name="contatos[' + counter + '][obs]" placeholder="Observação"></td>';
         cols += '<td><a style="color:#fff" class="btn btn-danger delLinha"><i class="material-icons">delete</i></a></td>';
         novaLinha.append(cols);
         $("table.dshy-table").append(novaLinha);
