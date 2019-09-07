@@ -55,7 +55,8 @@
                         {{-- <a href="{{route('fornecedor.edit', $dado->id)}}" class="btn btn-sm btn-primary">Visualizar</a>                                     --}}
                     <button type="button" class="btn btn-sm" style="background-color:#00977a; color:#fff;" {{isset($dado->qrCode) ? "onclick=openModal('" . $dado->qrCode . "');" : 'no' }}>QRCode</button>
                         <a href="{{route('produto.edit', $dado->id)}}" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
-                        <a href="{{route('produto.destroy', $dado->id)}}" class="btn btn-sm btn-danger">Deletar</a>
+                        <button type="button" id="deleteBtn" class="btn btn-sm btn-danger" onclick="deleteModal('{{$dado->nome}}')" data-url="{{route('produto.destroy', $dado->id)}}" >Deletar</a>
+
                     </td>
                 </tr>
                 @endforeach
@@ -123,6 +124,11 @@ function openModal(code){
 $('#myModal').modal('show')
 }
 
-
+function deleteModal(name){
+        $('#msg-delete').text('Tem certeza que deseja deletar o cliente ' + name + ' ?');
+        var confirma_delete = $('#deleteBtn').data('url');
+        $('#deletar-confirma').attr('href', confirma_delete);
+$('#deleteModal').modal('show');
+}
 </script>
 @endsection

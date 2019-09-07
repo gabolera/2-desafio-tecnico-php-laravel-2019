@@ -54,7 +54,7 @@
                     <td>
                         {{-- <a href="{{route('fornecedor.edit', $dado->id)}}" class="btn btn-sm btn-primary">Visualizar</a>                                     --}}
                         <a href="{{route('cliente.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
-                        <button type="button" id="deleteBox" class="btn btn-sm btn-danger" onclick="deleteModal({{'"' . $dado->id . ',' . $dado->nome . '"'}})" >Deletar</a>
+                        <button type="button" id="deleteBtn" class="btn btn-sm btn-danger" onclick="deleteModal('{{$dado->nome}}')"  data-url="{{route('cliente.destroy', $dado->id)}}" >Deletar</a>
                     </td>
                 </tr>
                 @endforeach
@@ -71,12 +71,11 @@
     "pageLength": 20,
     } );
 
-    function deleteModal(id, cliente){
-        $('#msg-delete').text('Tem certeza que deseja deletar o cliente ' + id);
-        
-
-
-$('#deleteModal').modal('show')
+    function deleteModal(name){
+        $('#msg-delete').text('Tem certeza que deseja deletar o produto ' + name + ' ?');
+        var confirma_delete = $('#deleteBtn').data('url');
+        $('#deletar-confirma').attr('href', confirma_delete);
+$('#deleteModal').modal('show');
 }
 </script>
 @endsection
