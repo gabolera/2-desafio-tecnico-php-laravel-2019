@@ -44,28 +44,37 @@
                     </td>
                     <td>
                         {{$dado->getClient->nome}}
-                        {{-- @php
-                        // dd($dado);
-                            $lista = $dado->pedidos;
+                    </td>
+                    <td>
+                        {{$dado->valorTotal}}
+                    </td>
+                    <td>
+                        @if ($dado->status == '0')
+                            <span class="badge badge-pill badge-warning">Aguardando pagamento</span>
+                        @elseif ($dado->status == '1')
+                            <span class="badge badge-pill badge-success">Pagamento efetuado</span>
+                        @elseif ($dado->status == '2')
+                            <span class="badge badge-pill badge-danger">Compra Cancelada</span>
+                        @else
+                            
+                        @endif
+                    </td>
+                    <td>          
+                        <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#00977a; color:#fff;">Imprimir Pedido</a>
 
+                        @if ($dado->status == '0')
+                            <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm btn-primary" style="color:#fff;">Lançar pagamento</a>
+                            <button type="button" id="deleteBtn{{$dado->id}}" class="btn btn-sm btn-danger" onclick="deleteModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.destroy', $dado->id)}}" data-id="{{$dado->id}}" >Cancelar pedido</a>
+                        @elseif ($dado->status == '1')
+                            {{-- <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#00977a; color:#fff;">Pedido devolução</a> --}}
+                        @elseif ($dado->status == '2')
+                        <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm btn-primary" style="color:#fff;">Reabrir pedido</a>
+                        @else
                             
-                            
-                            foreach($lista as $item){
-                                // $nome_item = \App\Models\Produto::find($item->produto_id)->get('nome');
-                                echo ($item->city);
-                            }
-                        @endphp --}}
-                    </td>
-                    <td>
-                        {{$dado->getClient->nome}}
-                    </td>
-                    <td>
-                        {{$dado->email}}
-                    </td>
-                    <td>
+                        @endif
                         {{-- <a href="{{route('fornecedor.edit', $dado->id)}}" class="btn btn-sm btn-primary">Visualizar</a>                                     --}}
-                        <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
-                        <button type="button" id="deleteBtn{{$dado->id}}" class="btn btn-sm btn-danger" onclick="deleteModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.destroy', $dado->id)}}" data-id="{{$dado->id}}" >Deletar</a>
+                        {{-- <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm btn-primary" style="color:#fff;">Alterar Status</a>
+                        <button type="button" id="deleteBtn{{$dado->id}}" class="btn btn-sm btn-danger" onclick="deleteModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.destroy', $dado->id)}}" data-id="{{$dado->id}}" >Cancelar pedido</a> --}}
                     </td>
                 </tr>
                 @endforeach
@@ -83,7 +92,7 @@
     } );
 
 function deleteModal(name, id){
-    $('#msg-delete').text('Tem certeza que deseja deletar o pedido nº ' + name + ' ?');
+    $('#msg-delete').text('Tem certeza que deseja cancelar o pedido nº ' + name + ' ?');
     var confirma_delete = $('#deleteBtn'+id).data('url');
     $('#delete-form').attr('action', confirma_delete);
     $('#deletar-confirma').val(id);
