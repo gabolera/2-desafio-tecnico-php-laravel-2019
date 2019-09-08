@@ -60,15 +60,15 @@
                         @endif
                     </td>
                     <td>          
-                        <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#00977a; color:#fff;">Imprimir Pedido</a>
+                        <a href="{{route('pedido.print', $dado->id)}}"" class="btn btn-sm" style="background-color:#00977a; color:#fff;">Imprimir Pedido</a>
 
                         @if ($dado->status == '0')
-                            <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm btn-primary" style="color:#fff;">Lançar pagamento</a>
-                            <button type="button" id="deleteBtn{{$dado->id}}" class="btn btn-sm btn-danger" onclick="deleteModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.destroy', $dado->id)}}" data-id="{{$dado->id}}" >Cancelar pedido</a>
+                            <button type="button" id="deleteBtn{{$dado->id}}" class="btn btn-sm btn-primary" onclick="deleteModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.updatePagamento', $dado->id)}}" data-id="{{$dado->id}}"> Lançar pagamento</a>                            
+                            <button type="button" id="deleteBtn{{$dado->id}}" class="btn btn-sm btn-danger ml-1" onclick="deleteModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.destroy', $dado->id)}}" data-id="{{$dado->id}}" >Cancelar pedido</a>
                         @elseif ($dado->status == '1')
                             {{-- <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#00977a; color:#fff;">Pedido devolução</a> --}}
                         @elseif ($dado->status == '2')
-                        <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm btn-primary" style="color:#fff;">Reabrir pedido</a>
+                        <a href="{{route('pedido.print', $dado->id)}}"" class="btn btn-sm btn-primary" style="color:#fff;">Reabrir pedido</a>
                         @else
                             
                         @endif
