@@ -80,7 +80,7 @@
                   
                                     <tr>
                                         <td>
-                                          <select class="custom-select form-control-lg" name="contato[{{$counter}}][tipo]">
+                                          <select class="custom-select form-control-lg table-select" name="contato[{{$counter}}][tipo]">
                                             @foreach($produtos as $produto)
                                             <option value="{{$produto->id}}">{{$produto->nome}}</option>
                                             @endforeach
@@ -99,7 +99,7 @@
                                   @else
                                   <tr>
                                       <td>
-                                        <select class="custom-select form-control-lg produto_id" name="pedido[0][produto_id]">
+                                        <select class="custom-select form-control-lg produto_id table-select" name="pedido[0][produto_id]">
                                             <option selected disabled>Selecione um produto</option>
                                           @foreach($produtos as $produto)
                                               <option value="{{$produto->id}}" data-info="{{$produto->valor_venda}}">{{$produto->nome}}</option>
@@ -153,17 +153,22 @@
     $(document).ready(function(){
 
       $(".js-example-responsive").select2({
-        width: 'resolve',
+        width: '100%',
       });
 
-      
+      function loadSelect2(){
+        $(".table-select").select2({
+          width: '100%',
+        });
+      }
+
       var counter = $('tbody').children('tr').length;
 
       $('#addLinha').on('click', function(){
         var novaLinha = $("<tr>");
         var cols = "";
 
-        cols += '<td><select class="custom-select form-control-lg produto_id" name="pedido[' + counter + '][produto_id]"><option selected disabled>Selecione um produto</option> @foreach($produtos as $produto) <option value="{{$produto->id}}" data-info="{{$produto->valor_venda}}">{{$produto->nome}}</option> @endforeach </select> </td>';
+        cols += '<td><select class="custom-select form-control-lg produto_id table-select" name="pedido[' + counter + '][produto_id]"><option selected disabled>Selecione um produto</option> @foreach($produtos as $produto) <option value="{{$produto->id}}" data-info="{{$produto->valor_venda}}">{{$produto->nome}}</option> @endforeach </select> </td>';
         cols += '<td><input type="text" class="form-control form-control-lg valor_unitario" name="pedido[' + counter + '][valor_unitario]" value="0.00" readonly></td>';
         cols += '<td><input type="number" class="form-control form-control-lg quantidade" name="pedido[' + counter + '][quantidade]" value=""></td>';
         cols += '<td><input type="text" class="form-control form-control-lg valor_multiplicado" name="pedido[' + counter + '][valor_multiplicacao]" placeholder="Valor total" value="" readonly> </td>';
@@ -172,13 +177,15 @@
         novaLinha.append(cols);
         $("table.dshy-table").append(novaLinha);
         counter++;
+        loadSelect2();
       });
 
       $('table.dshy-table').on('click', '.delLinha', function(e){
         $(this).closest("tr").remove();       
         // counter -= 1
       })
-    
+
+      loadSelect2();
     });
 
     $('table').on('change', function(){
@@ -207,7 +214,7 @@
       var total = $('.valor_total').val();
       $('.sub_total').val((Math.round((Number(total) - Number(desconto)) * 100) / 100).toFixed(2));
     });
-
+    
     });
   </script>
 @endsection

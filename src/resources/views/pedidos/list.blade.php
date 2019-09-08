@@ -8,7 +8,7 @@
         <div class="card-header border-bottom mt-2">
             <div class="row">
                 <div class="col-6">
-                    <h5><strong>Listando Pedidos</strong><h5>
+                    <h5><strong>Listando Pedidos (Em desenvolvimento)</strong><h5>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
                     <a href="{{route('pedido.create')}}" class="btn btn-success">Novo Pedido</a>
@@ -20,16 +20,16 @@
             <thead>
             <tr>
                 <th>
-                    ID
+                    Pedido nº
                 </th>
                 <th>
-                    Nome do Cliente
+                    Produto
                 </th>
                 <th>
-                    CPF
+                    Valor Total
                 </th>
                 <th>
-                    Email
+                    Status
                 </th>
                 <th>
                     Ações
@@ -43,10 +43,21 @@
                         {{$dado->id}}
                     </td>
                     <td>
-                        {{$dado->nome}}
+                        {{$dado->getClient->nome}}
+                        {{-- @php
+                        // dd($dado);
+                            $lista = $dado->pedidos;
+
+                            
+                            
+                            foreach($lista as $item){
+                                // $nome_item = \App\Models\Produto::find($item->produto_id)->get('nome');
+                                echo ($item->city);
+                            }
+                        @endphp --}}
                     </td>
                     <td>
-                        {{$dado->cpf}}
+                        {{$dado->getClient->nome}}
                     </td>
                     <td>
                         {{$dado->email}}
@@ -54,7 +65,7 @@
                     <td>
                         {{-- <a href="{{route('fornecedor.edit', $dado->id)}}" class="btn btn-sm btn-primary">Visualizar</a>                                     --}}
                         <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#ffa600; color:#fff;">Editar</a>
-                        <a href="{{route('pedido.destroy', $dado->id)}}" class="btn btn-sm btn-danger">Deletar</a>
+                        <button type="button" id="deleteBtn" class="btn btn-sm btn-danger" onclick="deleteModal('{{$dado->id}}')" data-url="{{route('pedido.destroy', $dado->id)}}" >Deletar</a>
                     </td>
                 </tr>
                 @endforeach
@@ -70,5 +81,12 @@
     "order": [[ 0, "desc" ]],
     "pageLength": 20,
     } );
+
+function deleteModal(name){
+    $('#msg-delete').text('Tem certeza que deseja deletar o pedido nº ' + name + ' ?');
+    var confirma_delete = $('#deleteBtn').data('url');
+    $('#deletar-confirma').attr('href', confirma_delete);
+$('#deleteModal').modal('show');
+}
 </script>
 @endsection

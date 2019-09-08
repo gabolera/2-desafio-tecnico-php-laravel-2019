@@ -29,13 +29,12 @@ class PedidoController extends Controller
 
     public function store(Request $request)
     {
-
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'cliente_id' => 'required',
             'vendedor_id' => 'required',
             'valorTotal' => 'required',
             'subTotal' => 'required',
-            'pedido' => 'required',            
+            'pedido' => 'required',        
         ],
         [
             'cliente_id.required' => 'Está faltando selecionar o cliente!',
@@ -43,8 +42,11 @@ class PedidoController extends Controller
             'valorTotal.required' => 'Ops... O servidor não enviou as informaçõe necessárias!',
             'subTotal.required' => 'Ops... O servidor não enviou as informaçõe necessárias!',
             'pedido.required' => 'Ops... O servidor não enviou as informaçõe necessárias!',
-
         ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
     
 
         $total = $request->valorTotal;
@@ -65,13 +67,7 @@ class PedidoController extends Controller
 
         $sub_total = ($valor_total - $desconto);
 
-        // if($sub_total != $subtotal){
-        //     $msg = 'Ops... O servidor não consegiu processar o sub-total';
-        // }elseif($total != $valor_total){
-        //     $msg = 'Ops... O servidor não conseguiu processar o total';
-        // }else{
-            $msg = 'Pedido registrado com sucesso!';
-        // }
+        $msg = 'Pedido registrado com sucesso!';
 
         $dados = new Pedido;
         $dados->cliente_id = $request->cliente_id;
@@ -81,7 +77,7 @@ class PedidoController extends Controller
         $dados->subTotal = $sub_total;
         $dados->pedidos = $lista_itens;
         $dados->dataPedido = Carbon::now();
-        // $dados->status = 0;
+        $dados->status = 0;
         $dados->save();
 
         return redirect()->route('pedido.index')->with(['success' => $msg])->withInput();
