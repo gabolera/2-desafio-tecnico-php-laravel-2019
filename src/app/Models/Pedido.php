@@ -15,13 +15,12 @@ class Pedido extends Model
         'pedidos' => 'array',
     ];
 
-    // public function getProdutoLista($value) {
-    //     return json_decode($value);
-    //   }
-
-
     public function getClient(){
         return $this->belongsTo('App\Models\Cliente', 'cliente_id');
+    }
+
+    public function getVendedor(){
+        return $this->belongsTo('App\User', 'vendedor_id');
     }
 
 }

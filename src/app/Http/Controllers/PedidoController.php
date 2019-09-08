@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use Carbon;
+use PDF;
 
 use App\Models\Pedido;
 use App\Models\Produto;
@@ -106,5 +107,13 @@ class PedidoController extends Controller
         $msg = 'Pedido deletado com sucesso';
 
         return redirect()->back()->with(['success' => $msg]);
+    }
+
+    public function pdfPedido($id){
+        $dados = Pedido::find($id);
+        // $pdf = PDF::loadView('pedidos.print', compact('dados'));
+        // $fileName = 'Pedido_'.$dados->id.'.pdf';
+        // return $pdf->download($fileName);
+        return view('pedidos.print')->with(['dados' => $dados]);
     }
 }
