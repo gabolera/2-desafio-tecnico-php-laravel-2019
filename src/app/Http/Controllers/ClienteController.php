@@ -108,9 +108,9 @@ class ClienteController extends Controller
         return redirect()->route('cliente.index')->with(['success' => $msg, 'contatos' => json_decode($contatos)]);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $cliente = Cliente::find($id);
+        $cliente = Cliente::find($request->id);
         $cliente->delete();
 
         $msg = 'O Cliente ' . $cliente->nome . ' foi removido com sucesso';

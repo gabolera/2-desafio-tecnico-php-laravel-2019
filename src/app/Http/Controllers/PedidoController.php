@@ -98,8 +98,13 @@ class PedidoController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(request $request)
     {
-        //
+        $dados = Pedido::find($request->id);
+        $dados->delete();
+
+        $msg = 'Pedido deletado com sucesso';
+
+        return redirect()->back()->with(['success' => $msg]);
     }
 }

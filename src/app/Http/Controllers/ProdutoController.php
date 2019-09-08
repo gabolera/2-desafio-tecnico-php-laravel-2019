@@ -110,9 +110,9 @@ class ProdutoController extends Controller
         return redirect()->route('produto.index')->with(['success' => $msg, 'warning' => $code_alterado]);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $produto = Produto::find($id);
+        $produto = Produto::find($request->id);
         $produto->delete();
 
         $msg = 'Produto deletado com sucesso';

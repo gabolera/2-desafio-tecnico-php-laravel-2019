@@ -212,7 +212,10 @@
                 
             </div>
             <div class="modal-footer">
-                <a id="deletar-confirma" class="btn btn-danger">Deletar</a>
+                <form id="delete-form" method="POST">
+                @csrf
+                <button type="submit" id="deletar-confirma" class="btn btn-danger" name="id" value="">Deletar</button>
+                </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
             </div>
             </div>
