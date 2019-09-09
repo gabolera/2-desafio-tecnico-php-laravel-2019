@@ -130,11 +130,13 @@ class ProdutoController extends Controller
          */
 
         if(\Auth::check()){
-            $result = Produto::where('qrCode', $search)->first();
+            $dados = Produto::where('qrCode', $search)->first();
+            return redirect()->route('produto.edit', $dados->id)->with(['dados' => $dados]);
         }else{
-            $result = Produto::where('qrCode', $search)->first(['nome', 'valor_venda']);
+            $dados = Produto::where('qrCode', $search)->first(['nome', 'valor_venda']);
+            return view('produtos.public_produto')->with(['dados' => $dados]);
         }
 
-        return $result;
+        return $dados;
     }
 }

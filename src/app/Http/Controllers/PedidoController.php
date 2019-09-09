@@ -116,4 +116,14 @@ class PedidoController extends Controller
         // return $pdf->download($fileName);
         return view('pedidos.print')->with(['dados' => $dados]);
     }
+
+    public function pagamentoPedido(request $request){
+        // dd($request->all());
+        $dados = Pedido::find($request->id);
+        $dados->status = 1;
+        $dados->update();
+
+        return redirect()->back();
+    }
+
 }

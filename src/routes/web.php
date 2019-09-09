@@ -50,7 +50,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
     Route::put('/pedidos/e/{id}', ['as' => 'pedido.update', 'uses' => 'PedidoController@update']);
     Route::post('/pedidos/d', ['as' => 'pedido.destroy', 'uses' => 'PedidoController@destroy']);
     Route::get('/pedidos/i/{id}', ['as' => 'pedido.print', 'uses' => 'PedidoController@pdfPedido']);
-    Route::post('/pedidos/u/pagamento', ['as' => 'pedido.updatePagamento', 'uses' => 'PedidoController@pdfPedido']);
+    Route::post('/pedidos/u/pagamento', ['as' => 'pedido.updatePagamento', 'uses' => 'PedidoController@pagamentoPedido']);
     
 });    
 
