@@ -109,7 +109,8 @@ $('#example').dataTable( {
 
 function openModal(code){
     $('#qrcode').empty();
-    const local = '{{env('API_URL')}}{{!empty(env('API_PORT')) ? ':'.env('API_PORT') : ''}}/api/produto/consulta?q=';
+    // const local = '{{env('API_URL')}}{{!empty(env('API_PORT')) ? ':'.env('API_PORT') : ''}}/url?q=';
+    const local = '{{route('produto.pesquisa')}}?q=';
 
     var qrcode = new QRCode("qrcode", {
     text: local+code,

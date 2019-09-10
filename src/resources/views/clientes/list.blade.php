@@ -93,7 +93,16 @@ $('#deleteModal').modal('show');
 
 $(document).ready(function(){
     // var url = "'" + {{route('cliente.MultipleDestroy')}} + "'";
-    $('#example_wrapper').find('#example_filter').prepend('<button type="submit" id="multiple-Delete-btn" class="btn btn-sm btn-danger mr-5" onclick="MultipleDelete()" data-url="/dashboard/cliente/dm/">Deletar Selecionados</a>');
+    $('#example_wrapper').find('#example_filter').prepend('<button type="submit" id="multiple-Delete-btn" class="btn btn-sm btn-danger mr-5" onclick="MultipleDelete()" data-url="/dashboard/cliente/dm/" style="display: none;">Deletar Selecionados</a>');
+});
+
+$(document).on('change','#example input:checkbox',function () {
+    if($('#example input:checkbox:checked').length > 0) {
+        $('#multiple-Delete-btn').show();
+    }
+    else {
+        $('#multiple-Delete-btn').hide();
+    }
 });
 
 function MultipleDelete(){

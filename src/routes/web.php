@@ -56,3 +56,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 });    
 
 Route::get('/api/produto/consulta', ['as' => 'produto.pesquisa', 'uses' => 'ProdutoController@search']);
+
+
+Route::get('/api/produto/consulta/{id}', ['as' => 'produto.api', 'uses' => 'ProdutoController@API']);
+Route::get('/api/cliente/consulta/{id}', ['as' => 'cliente.api', 'uses' => 'ClienteController@API']);
+Route::get('/api/pedido/consulta/{id}', ['as' => 'pedido.api', 'uses' => 'PedidoController@API']);

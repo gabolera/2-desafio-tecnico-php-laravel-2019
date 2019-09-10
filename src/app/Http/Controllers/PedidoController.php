@@ -126,4 +126,28 @@ class PedidoController extends Controller
         return redirect()->back();
     }
 
+    public function API($id){
+        /**
+         *  SE A PESSOA ESTIVER LOGADA NO SISTEMA, A SUA CONSULTA
+         *  NA API SERÁ COMPLETA. ENTRETANTO, SE A PESSOA NÃO ESTIVER
+         *  LOGADA, SÓ IRÁ APARECER O VALOR E O NOME DO PRODUTO. 
+         */
+
+        $dados = Pedido::find($id);
+
+        if(\Auth::check()){
+            if(!empty($dados)){
+                return response()->json($dados);
+            }
+            
+        }else{
+            $dados = 'Requisição negada! (necessário estar logado)';
+            if(!empty($dados)){
+                return response()->json($dados);
+            }
+        }
+
+        return redirect('/');
+    }
+
 }
