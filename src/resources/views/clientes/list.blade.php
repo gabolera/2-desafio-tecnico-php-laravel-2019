@@ -107,14 +107,6 @@ $(document).on('change','#example input:checkbox',function () {
 
 function MultipleDelete(){
     var checkeds = [];
-
-    // $('.select-checked').each(function e(){
-    //     if ($(this).is(':checked')){
-    //         checkeds += $(this).val();
-    //     };
-    //     console.log(checkeds);
-    // })
-
     $('.select-checked').each(function(){
        if ($(this).is(':checked')){
         checkeds.push($(this).val());

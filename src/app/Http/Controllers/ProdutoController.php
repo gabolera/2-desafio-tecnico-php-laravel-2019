@@ -120,6 +120,19 @@ class ProdutoController extends Controller
         return redirect()->back()->with(['success' => $msg]);
     }
 
+    public function MultipleDestroy(request $request){
+
+        $array = $request->selected;
+
+        foreach($array as $item){
+            $cliente = Produto::find($item);
+            $cliente->delete();
+        }
+
+        $msg = 'Operação realizada com sucesso!';
+        return redirect()->back()->with(['success' => $msg ]);
+    }
+
     public function search(Request $request){
         $search = $request->q;
 

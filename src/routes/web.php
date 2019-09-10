@@ -42,6 +42,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
     Route::get('/produto/e/{id}', ['as' => 'produto.edit', 'uses' => 'ProdutoController@edit']);
     Route::put('/produto/e/{id}', ['as' => 'produto.update', 'uses' => 'ProdutoController@update']);
     Route::post('/produto/d/{id}', ['as' => 'produto.destroy', 'uses' => 'ProdutoController@destroy']);
+    Route::post('/produto/dm/', ['as' => 'produto.MultipleDestroy', 'uses' => 'ProdutoController@MultipleDestroy']);
 
     Route::get('/pedidos', ['as' => 'pedido.index', 'uses' => 'PedidoController@index']);
     Route::get('/pedidos/novo', ['as' => 'pedido.create', 'uses' => 'PedidoController@create']);
@@ -52,6 +53,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
     Route::post('/pedidos/d', ['as' => 'pedido.destroy', 'uses' => 'PedidoController@destroy']);
     Route::get('/pedidos/i/{id}', ['as' => 'pedido.print', 'uses' => 'PedidoController@pdfPedido']);
     Route::post('/pedidos/u/pagamento', ['as' => 'pedido.updatePagamento', 'uses' => 'PedidoController@pagamentoPedido']);
+    Route::post('/pedidos/dm/', ['as' => 'pedido.MultipleDestroy', 'uses' => 'PedidoController@MultipleDestroy']);
     
 });    
 
