@@ -216,7 +216,7 @@
                 @csrf
                 <button type="submit" id="deletar-confirma" class="btn btn-danger" name="id" value="">Deletar</button>
                 </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" id="CancelModal" data-dismiss="modal">Fechar</button>
             </div>
             </div>
         </div>

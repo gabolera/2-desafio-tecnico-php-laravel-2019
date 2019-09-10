@@ -20,6 +20,9 @@
             <thead>
             <tr>
                 <th>
+                    
+                </th>
+                <th>
                     ID
                 </th>
                 <th>
@@ -39,6 +42,12 @@
             <tbody>
                 @foreach ($dados as $dado)
                 <tr>
+                    <td>
+                        <div class="custom-control custom-checkbox mb-1">
+                            <input type="checkbox" class="custom-control-input select-checked" id="formsCheckboxDefault-{{$dado->id}}" name="select[]" value="{{$dado->id}}">
+                            <label class="custom-control-label" for="formsCheckboxDefault-{{$dado->id}}"> </label>
+                        </div>
+                    </td>
                     <td>
                         {{$dado->id}}
                     </td>
@@ -69,11 +78,11 @@
 @section('scripts')
 <script>
     $('#example').dataTable( {
-    "order": [[ 0, "desc" ]],
+    "order": [[ 1, "desc" ]],
     "pageLength": 20,
     } );
 
-    function deleteModal(name, id){
+function deleteModal(name, id){
     $('#msg-delete').text('Tem certeza que deseja deletar o pedido nº ' + name + ' ?');
     var confirma_delete = $('#deleteBtn'+id).data('url');
     $('#delete-form').attr('action', confirma_delete);
@@ -81,5 +90,50 @@
     
 $('#deleteModal').modal('show');
 }
+
+$(document).ready(function(){
+    // var url = "'" + {{route('cliente.MultipleDestroy')}} + "'";
+    $('#example_wrapper').find('#example_filter').prepend('<button type="submit" id="multiple-Delete-btn" class="btn btn-sm btn-danger mr-5" onclick="MultipleDelete()" data-url="/dashboard/cliente/dm/">Deletar Selecionados</a>');
+});
+
+function MultipleDelete(){
+    var checkeds = [];
+
+    // $('.select-checked').each(function e(){
+    //     if ($(this).is(':checked')){
+    //         checkeds += $(this).val();
+    //     };
+    //     console.log(checkeds);
+    // })
+
+    $('.select-checked').each(function(){
+       if ($(this).is(':checked')){
+        checkeds.push($(this).val());
+    } 
+    }) 
+
+    MultipleDeleteConfirm(checkeds)
+
+}
+
+function MultipleDeleteConfirm(id){
+        addForm = '';
+    $.each(id, function (index, value){
+        $('#deletar-confirma').before().append('<input id="multiple-delete-forms" type="hidden" name="selected[]" value="' + value + '">');
+    })
+        
+    $('#msg-delete').text('Você está prestes a deletar diversos arquivos!');
+    var confirma_delete = $('#multiple-Delete-btn').data('url');
+    $('#delete-form').attr('action', confirma_delete);
+    $('#deletar-confirma').val();
+    
+$('#deleteModal').modal('show');
+
+}
+
+$('#CancelModal').on('click', function(){
+    $('input[name="selected[]"]').remove();
+});
+
 </script>
 @endsection

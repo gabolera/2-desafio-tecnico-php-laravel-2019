@@ -32,7 +32,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
     Route::get('/cliente/{id}', ['as' => 'cliente.show', 'uses' => 'ClienteController@show']);
     Route::get('/cliente/e/{id}', ['as' => 'cliente.edit', 'uses' => 'ClienteController@edit']);
     Route::put('/cliente/e/{id}', ['as' => 'cliente.update', 'uses' => 'ClienteController@update']);
-    Route::post('/cliente/d/{id}/', ['as' => 'cliente.destroy', 'uses' => 'ClienteController@destroy']);
+    Route::post('/cliente/d', ['as' => 'cliente.destroy', 'uses' => 'ClienteController@destroy']);
+    Route::post('/cliente/dm/', ['as' => 'cliente.MultipleDestroy', 'uses' => 'ClienteController@MultipleDestroy']);
 
     Route::get('/produtos', ['as' => 'produto.index', 'uses' => 'ProdutoController@index']);
     Route::get('/produto/novo', ['as' => 'produto.create', 'uses' => 'ProdutoController@create']);

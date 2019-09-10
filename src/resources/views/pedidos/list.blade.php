@@ -23,7 +23,7 @@
                     Pedido nº
                 </th>
                 <th>
-                    Produto
+                    Cliente
                 </th>
                 <th>
                     Valor Total
@@ -64,7 +64,7 @@
 
                         @if ($dado->status == '0')
                             <button type="button" id="pgmtBtn{{$dado->id}}" class="btn btn-sm btn-primary" onclick="EditPagamentoModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.updatePagamento')}}" data-id="{{$dado->id}}"> Lançar pagamento</a>                            
-                            <button type="button" id="deleteBtn{{$dado->id}}" class="btn btn-sm btn-danger ml-1" onclick="deleteModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.destroy')}}" data-id="{{$dado->id}}">Cancelar pedido</a>
+                            <button type="button" id="CancelarBtn{{$dado->id}}" class="btn btn-sm btn-danger ml-1" onclick="alert('Botão em construção, aguarde')" data-url="{{route('pedido.destroy')}}" data-id="{{$dado->id}}">Cancelar pedido</a>
                         @elseif ($dado->status == '1')
                             {{-- <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#00977a; color:#fff;">Pedido devolução</a> --}}
                         @elseif ($dado->status == '2')

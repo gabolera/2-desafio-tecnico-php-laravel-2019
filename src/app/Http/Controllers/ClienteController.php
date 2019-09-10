@@ -116,4 +116,18 @@ class ClienteController extends Controller
         $msg = 'O Cliente ' . $cliente->nome . ' foi removido com sucesso';
         return redirect()->back()->with(['success' => $msg ]);
     }
+
+    public function MultipleDestroy(request $request){
+
+        $array = $request->selected;
+        
+        foreach($array as $item){
+            $cliente = Cliente::find($item);
+            $cliente->delete();
+        }
+
+        $msg = 'Operação realizada com sucesso!';
+        return redirect()->back()->with(['success' => $msg ]);
+    }
+
 }

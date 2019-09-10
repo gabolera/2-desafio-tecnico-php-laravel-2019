@@ -131,12 +131,17 @@ class ProdutoController extends Controller
 
         if(\Auth::check()){
             $dados = Produto::where('qrCode', $search)->first();
+            if(!empty($dados)){
+                return view('produtos.public_produto')->with(['dados' => $dados]);
+            }
             return redirect()->route('produto.edit', $dados->id)->with(['dados' => $dados]);
         }else{
             $dados = Produto::where('qrCode', $search)->first(['nome', 'valor_venda']);
-            return view('produtos.public_produto')->with(['dados' => $dados]);
+            if(!empty($dados)){
+                return view('produtos.public_produto')->with(['dados' => $dados]);
+            }
         }
 
-        return $dados;
+        return redirect('/');
     }
 }
