@@ -43,10 +43,10 @@
                         {{$dado->id}}
                     </td>
                     <td>
-                        {{$dado->getClient->nome}}
+                        <a href="{{route('cliente.show', $dado->getClient->id)}}">{{$dado->getClient->nome}}</a>
                     </td>
                     <td>
-                        {{$dado->valorTotal}}
+                        {{$dado->subTotal}}
                     </td>
                     <td>
                         @if ($dado->status == '0')

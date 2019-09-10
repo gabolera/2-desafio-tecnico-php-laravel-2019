@@ -62,7 +62,10 @@ class ClienteController extends Controller
 
     public function show($id)
     {
-        //
+        $dados = Cliente::find($id);
+        $contatos = json_decode($dados->contatos);
+        $readonly = 1;
+        return view('clientes.form')->with(['page' => 'cliente', 'dados' => $dados, 'contatos' => $contatos, 'readonly' => $readonly]);
     }
 
     public function edit($id)

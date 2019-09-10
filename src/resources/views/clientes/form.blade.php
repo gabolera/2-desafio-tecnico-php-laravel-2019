@@ -8,7 +8,13 @@
         <div class="page-header row no-gutters py-4">
           <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
             <span class="text-uppercase page-subtitle">Cliente</span>
+            @if(!empty($readonly))
+            <h3 class="page-title">{{isset($dados) ? 'Dados de ' . $dados->nome : ''}}</h3>
+                
+            @else
             <h3 class="page-title">{{isset($dados) ? 'Você está editando ' . $dados->nome : 'Cadastrar Novo cliente'}}</h3>
+            @endif
+
           </div>
         </div>
         <!-- End Page Header -->
@@ -33,15 +39,15 @@
                         <div class="row">
                             <div class="col-8">
                                 <label for="nome">Nome do Cliente</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="Nome do cliente" id="nome" name="nome" value="{{isset($dados->nome) ? $dados->nome : old('nome') }}" autofocus required>
+                                <input class="form-control form-control-lg mb-3" type="text" placeholder="Nome do cliente" id="nome" name="nome" value="{{isset($dados->nome) ? $dados->nome : old('nome') }}" autofocus required {{!empty($readonly) ? 'readonly' : ''}}>
                             </div>
                             <div class="col-4">
                                 <label for="CPF">CPF</label>
-                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.000.000-00" id="CPF" name="cpf" value="{{isset($dados->cpf) ? $dados->cpf : old('cpf') }}" data-mask="000.000.000-99" data-mask-reverse="true" required>
+                                <input class="form-control form-control-lg mb-3" type="text" placeholder="000.000.000-00" id="CPF" name="cpf" value="{{isset($dados->cpf) ? $dados->cpf : old('cpf') }}" data-mask="000.000.000-99" data-mask-reverse="true" required {{!empty($readonly) ? 'readonly' : ''}}>
                             </div>
                             <div class="col-12">
                                 <label for="email">Email</label>
-                                <input class="form-control form-control-lg mb-3" type="email" placeholder="meuemail@host.com" id="email" name="email" value="{{isset($dados->email) ? $dados->email : old('email') }}" required>
+                                <input class="form-control form-control-lg mb-3" type="email" placeholder="meuemail@host.com" id="email" name="email" value="{{isset($dados->email) ? $dados->email : old('email') }}" required {{!empty($readonly) ? 'readonly' : ''}}>
                             </div>
                         </div>
 
@@ -75,19 +81,23 @@
                                     @foreach ($contatos as $contato)
                                     <tr>
                                     <td>
-                                      <input type="text" class="form-control form-control-lg" name="contato[{{$counter}}][telefone]" placeholder="(00) 00000-0000" value="{{isset($contato->telefone) ? $contato->telefone : ''}}">
+                                      <input type="text" class="form-control form-control-lg" name="contato[{{$counter}}][telefone]" placeholder="(00) 00000-0000" value="{{isset($contato->telefone) ? $contato->telefone : ''}}" {{!empty($readonly) ? 'readonly' : ''}}>
                                     </td>
                                         <td>
-                                          <select class="custom-select form-control-lg" name="contato[{{$counter}}][tipo]">
+                                          <select class="custom-select form-control-lg" name="contato[{{$counter}}][tipo]" {{!empty($readonly) ? 'readonly' : ''}}>
                                             <option value="0" {{ ($contato->tipo == '0' ? 'selected' : '')}}>Celular</option>
                                             <option value="1" {{ ($contato->tipo == '1' ? 'selected' : '')}}>Fixo</option>
                                             <option value="2" {{ ($contato->tipo == '2' ? 'selected' : '')}}>Comercial</option>
                                           </select>
                                         </td>
                                         <td>
-                                          <input type="text" class="form-control form-control-lg" name="contato[{{$counter}}][obs]" placeholder="Observação" value="{{isset($contato->obs) ? $contato->obs : ''}}">
+                                          <input type="text" class="form-control form-control-lg" name="contato[{{$counter}}][obs]" placeholder="Observação" value="{{isset($contato->obs) ? $contato->obs : ''}}" {{!empty($readonly) ? 'readonly' : ''}}>
                                         </td>
+                                        @if(!empty($readonly))
+
+                                        @else
                                         <td><a class="btn btn-danger delLinha" style="color:#fff"><i class="material-icons">delete</i></a></td>
+                                        @endif
                                         </tr>
                                         @php ($counter = $counter+1) @endphp
                                     @endforeach
@@ -101,24 +111,37 @@
                                   @endif
                                 </tbody>
                                 </table>
-                            </div>
+                            </div>                            @if(!empty($readonly))
+                                        
+                            @else
                             <div class="card-footer">
                                 <hr>
                                 <div class="d-flex justify-content-end">
+        
                                     <a class="btn btn-sm btn-success" style="color:#fff;" id="addLinha">+ Adicionar contato</a>
+                                    
                                 </div>
                             </div>
+                            @endif
                         </div>
                 
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <div>
+ 
+                            @if(!empty($readonly))
+                            <a href="{{route('pedido.index')}}" class="btn btn-outline-secondary">
+                                <i class="material-icons">replay</i> Voltar
+                            </a>  
+                            @else
                             <a href="{{route('cliente.index')}}" class="btn btn-outline-secondary">
                                 <i class="material-icons">cancel</i> Cancelar
                             </a>
                             <button class="btn btn-primary ml-auto" type="submit">
                                 <i class="material-icons">file_copy</i> Salvar
                             </button>
+                            @endif
+                           
                         </div>
                     </div>
                 </form>
