@@ -64,11 +64,14 @@
 
                         @if ($dado->status == '0')
                             <button type="button" id="pgmtBtn{{$dado->id}}" class="btn btn-sm btn-primary" onclick="EditPagamentoModal('{{$dado->id}}', '{{$dado->id}}')" data-url="{{route('pedido.updatePagamento')}}" data-id="{{$dado->id}}"> Lançar pagamento</a>                            
-                            <button type="button" id="CancelarBtn{{$dado->id}}" class="btn btn-sm btn-danger ml-1" onclick="alert('Botão em construção, aguarde')" data-url="{{route('pedido.destroy')}}" data-id="{{$dado->id}}">Cancelar pedido</a>
+                            <button type="button" id="CancelarBtn{{$dado->id}}" class="btn btn-sm btn-danger ml-1" onclick="deleteModal('{{$dado->id}}','{{$dado->id}}')" data-url="{{route('pedido.cancel')}}" data-id="{{$dado->id}}">Cancelar pedido</a>
                         @elseif ($dado->status == '1')
                             {{-- <a href="{{route('pedido.edit', $dado->id)}}"" class="btn btn-sm" style="background-color:#00977a; color:#fff;">Pedido devolução</a> --}}
                         @elseif ($dado->status == '2')
-                        <a href="{{route('pedido.print', $dado->id)}}"" class="btn btn-sm btn-primary" style="color:#fff;">Reabrir pedido</a>
+                        <button type="button" id="Reabrir-pedido{{$dado->id}}" class="btn btn-sm btn-primary ml-1" onclick="ReopenModal('{{$dado->id}}','{{$dado->id}}')" data-url="{{route('pedido.reopen')}}" data-id="{{$dado->id}}">Reabrir Pedido</button>
+
+                        
+                        {{-- <a href="{{route('pedido.print', $dado->id)}}"" class="btn btn-sm btn-primary" style="color:#fff;">Reabrir pedido</a> --}}
                         @else
                             
                         @endif
@@ -123,9 +126,18 @@
 
 function deleteModal(name, id){
     $('#msg-delete').text('Tem certeza que deseja cancelar o pedido nº ' + name + ' ?');
-    var confirma_delete = $('#deleteBtn'+id).data('url');
+    var confirma_delete = $('#CancelarBtn'+id).data('url');
     $('#delete-form').attr('action', confirma_delete);
-    $('#deletar-confirma').val(id);
+    $('#deletar-confirma').val(id).text('Confirmar');
+    
+$('#deleteModal').modal('show');
+}
+
+function ReopenModal(name, id){
+    $('#msg-delete').text('Tem certeza que deseja reabrir o pedido nº ' + name + ' ?');
+    var confirma_delete = $('#Reabrir-pedido'+id).data('url');
+    $('#delete-form').attr('action', confirma_delete);
+    $('#deletar-confirma').val(id).text('Confirmar').attr('class', 'btn btn-sm btn-success');
     
 $('#deleteModal').modal('show');
 }

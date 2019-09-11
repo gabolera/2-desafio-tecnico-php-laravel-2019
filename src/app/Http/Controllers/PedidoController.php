@@ -123,7 +123,29 @@ class PedidoController extends Controller
         $dados->status = 1;
         $dados->update();
 
-        return redirect()->back();
+        $msg = 'Pagamento confirmado com sucesso!';
+
+        return redirect()->back()->with(['success' => $msg]);
+    }
+
+    public function cancel(request $request){
+        $dados = Pedido::find($request->id);
+        $dados->status = 2;
+        $dados->update();
+
+        $msg = 'Pedido cancelado com sucesso!';
+
+        return redirect()->back()->with(['success' => $msg]);
+    }
+
+    public function reopen(request $request){
+        $dados = Pedido::find($request->id);
+        $dados->status = 0;
+        $dados->update();
+
+        $msg = 'Pedido re-aberto com sucesso!';
+
+        return redirect()->back()->with(['success' => $msg]);
     }
 
     public function API($id){

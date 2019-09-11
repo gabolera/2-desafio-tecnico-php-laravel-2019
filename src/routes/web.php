@@ -54,6 +54,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
     Route::get('/pedidos/i/{id}', ['as' => 'pedido.print', 'uses' => 'PedidoController@pdfPedido']);
     Route::post('/pedidos/u/pagamento', ['as' => 'pedido.updatePagamento', 'uses' => 'PedidoController@pagamentoPedido']);
     Route::post('/pedidos/dm/', ['as' => 'pedido.MultipleDestroy', 'uses' => 'PedidoController@MultipleDestroy']);
+    Route::post('/pedidos/c/', ['as' => 'pedido.cancel', 'uses' => 'PedidoController@cancel']);
+    Route::post('/pedidos/uc/', ['as' => 'pedido.reopen', 'uses' => 'PedidoController@reopen']);
     
 });    
 
