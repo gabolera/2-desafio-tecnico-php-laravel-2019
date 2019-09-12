@@ -108,7 +108,7 @@
             
         </div>
         <div class="modal-footer">
-            <button type="submit" id="pgmt-form-confirma" class="btn btn-success" onclick="pagamento_efetuado({{$dado->id}})">Confirmar pagamento</button>
+            <button type="submit" id="pgmt-form-confirma" class="btn btn-success">Confirmar pagamento</button>
             </form>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
         </div>
