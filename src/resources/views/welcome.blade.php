@@ -80,7 +80,7 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div class="title m-b-md" style="font-size: 30px;">
                     Gabriel Andreazza - Challenge 2 Laravel
                 </div>
 
