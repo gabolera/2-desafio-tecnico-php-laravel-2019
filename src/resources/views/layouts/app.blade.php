@@ -40,8 +40,8 @@
                         <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
                         <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                             <div class="d-table m-auto">
-                            <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="{{asset('images/shards-dashboards-logo.svg')}}" alt="Shards Dashboard">
-                            <span class="d-none d-md-inline ml-1">Shards Dashboard</span>
+                            <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="{{asset('images/shards-dashboards-logo.svg')}}" alt="Laravel Challenge 1">
+                            <span class="d-none d-md-inline ml-1">Laravel Challenge 1</span>
                             </div>
                         </a>
                         <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
@@ -84,7 +84,7 @@
                             <span>Pedidos</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link " href="user-profile-lite.html">
                             <i class="material-icons">person</i>
                             <span>User Profile</span>
@@ -95,7 +95,7 @@
                             <i class="material-icons">error</i>
                             <span>Errors</span>
                             </a>
-                        </li>
+                        </li> --}}
                         </ul>
                     </div>
                     </aside>
@@ -121,13 +121,13 @@
                                     <span class="d-none d-md-inline-block">{{ Auth::user()->name }}</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-small">
-                                    <a class="dropdown-item" href="user-profile-lite.html">
+                                    {{-- <a class="dropdown-item" href="user-profile-lite.html">
                                     <i class="material-icons">&#xE7FD;</i> Profile</a>
                                     <a class="dropdown-item" href="components-blog-posts.html">
                                     <i class="material-icons">vertical_split</i> Blog Posts</a>
                                     <a class="dropdown-item" href="add-new-post.html">
                                     <i class="material-icons">note_add</i> Add New Post</a>
-                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-divider"></div> --}}
                                     <a class="dropdown-item text-danger" href="{{route('logout')}}">
                                     <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                                 </div>
@@ -228,8 +228,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
     <script src="{{asset('scripts/plugins/mask/jquery.mask.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-<script src="{{asset('scripts/shards-dashboards.1.1.0.min.js')}}"></script>
-<script src="{{asset('scripts/app/app-blog-overview.1.1.0.min.js')}}"></script>
+    <script src="{{asset('scripts/shards-dashboards.1.1.0.min.js')}}"></script>
+    <script src="{{asset('scripts/app/app-blog-overview.1.1.0.min.js')}}"></script>
 
     @yield('scripts')
 </body>

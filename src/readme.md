@@ -1,18 +1,35 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+  <img src="https://img.shields.io/github/issues/dshy1/PHP-Challenge-Laravel-2">
+  <img src="https://img.shields.io/github/license/dshy1/PHP-Challenge-Laravel-2">
+  <img src="https://img.shields.io/github/forks/dshy1/PHP-Challenge-Laravel-2">
+  <img src="https://img.shields.io/github/stars/dshy1/PHP-Challenge-Laravel-2">
 </p>
 
-## How to install
+### Requisitos (Laravel 6)
+- PHP >= 7.2.0
+- BCMath PHP Extension
+- Ctype PHP Extension
+- JSON PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+
+#### Demo: 
+**[Ver projeto online](http://project1.houtlyn.com.br)**
+Registre-se, com seu e-mail, não é necessário fazer validação do email. 
+
+Achou algum bug? [Clique aqui e reporte](https://github.com/dshy1/PHP-Challenge-Laravel-2/issues/new)
+
+**Gostou? Deixe sua estrelhinha aí em cima :)**
+
+## Como instalar
 
 ```sh
 $ git clone https://github.com/dshy1/PHP-Challenge-Laravel-2.git
 
-$ cd PHP-Challenge-Laravel-2
+$ cd PHP-Challenge-Laravel-2/src
 $ composer install
 
 $ cp .env.example .env
@@ -20,15 +37,17 @@ $ cp .env.example .env
 $ php artisan key:generate
 ```
 
-Go to create a table on database.
-Before create the table, go to `.env` file for edit settings of project.
+Agora devemos crirar um banco de dados no nosso mysql (seja `phpMyAdmin` ou outros) e passar as configurações para o `.env` na pasta do nosso projeto.
 
----
-On `.env` file
-Change your database configurations.
+```diff
+- Caso o .env não esteja aparecendo!
+- Verifique se seu sistema está ocultando os arquivos ocultos (Ctrl+H)
 
+! Caso não resolveu! provavelmente você fez algum passo errado!
+! Caso você fez tudo certo, reporte o problema nesse repositório.
+```
 
-#### Now lets start project 
+#### Agora vamos iniciar nosso pojeto.
 
 ```sh
 $ php artisan migrate
